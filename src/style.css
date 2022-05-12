@@ -12134,3 +12134,64 @@ fieldset:disabled .btn {
 .meaning-div li {
   font-size: 1.3rem;
 }
+
+.cardHiragana, .cardKatakana {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 1rem;
+}
+
+.btnHiraganaPractice {
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  background: #D7BED4;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 5px 40px;
+  border-radius: 1rem;
+  box-shadow: 0px 17px 10px -10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  -webkit-transition: all ease-in-out 300ms;
+  transition: all ease-in-out 300ms;
+  border: none;
+}
+
+.btnHiraganaPractice:hover {
+  color: #FFFFFF;
+  box-shadow: 0px 37px 20px -20px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translate(0px, -10px) scale(1.2);
+          transform: translate(0px, -10px) scale(1.2);
+}
+
+.hiraganaContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hiraganaCard {
+  display: flex;
+  padding: 5px;
+  margin: 5px;
+  flex-direction: column;
+  align-items: center;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 10px;
+  background-color: #D7BED4;
+}
+
+.hiraganaCard .mainCharacter {
+  font-weight: bold;
+  font-size: 50px;
+  margin-bottom: 0px;
+}
+
+.scroll {
+  max-height: 50rem;
+  overflow-y: auto;
+}
