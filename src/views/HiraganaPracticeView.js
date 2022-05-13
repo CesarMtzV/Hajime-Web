@@ -105,34 +105,34 @@ const HiraganaPracticeView = () => {
                 <div><Toaster/></div>
                 <div className="container-fluid px-0 px-sm-3">
                     <div className="row" style={{height: "45rem"}}>
-                        <div className="col-md-7 ps-5 h-100">
+                        <div className="col-md-7 px-5 h-100">
                             <div className="card align-items-center mt-3 pb-3 text-white h-100" style={{backgroundColor: "#B98CB3" }}>
                                 <div className="d-flex align-items-center w-100 pt-2">
                                     <h2 className="card-title px-4">Practice Mode</h2>
                                     <h4 className="card-subtitle ms-auto px-4 fw-light">Score: {score}</h4>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div className="cardHiragana" style={{ backgroundColor: "#D7BED4"}}>
-                                        <h1 style={{fontSize: "20rem"}}>{currCharacter.questionText}</h1>
+                                    <div className="cardHiragana h-75 w-100 mx-5" style={{ backgroundColor: "#D7BED4"}}>
+                                        <p style={{fontSize: "20rem"}}>{currCharacter.questionText}</p>
                                     </div>
-                                    <div className="ms-3 hiraganaPractice">
+                                    <div className="hiraganaPractice h-75 w-100 me-5">
                                         {currCharacter.answerOption.map((answerOption, index) => (
-                                            <button key={index} className="btnHiraganaPractice" onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
+                                            <motion.button whileHover={{scale: 1.1}} whileTap = {{scale: 0.9}} key={index} className="btnHiraganaPractice" onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}>
                                                 <span>{answerOption.answerText}</span>
-                                            </button>
+                                            </motion.button>
                                         ))}
                                     </div>
                                 </div>
                                 <motion.button 
                                     whileHover={{scale: 1.1}}
                                     whileTap = {{scale: 0.9}}
-                                    className="hajime-button ms-auto me-3">
+                                    className="hajime-button ms-auto me-3 text-white">
                                     More
                                 </motion.button>
                             </div>
                         </div>
-                        <div className="col-md-5 h-100">
-                            <div className="hiraganaContainer mt-3 me-5 scroll border rounded">
+                        <div className="col-md-5 h-100 mt-3">
+                            <div className="hiraganaContainer mx-4 scroll">
                                 {Object.keys(hira).map((key, index) => {
                                     return (
                                         <motion.div 
