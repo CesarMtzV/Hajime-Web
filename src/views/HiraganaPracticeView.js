@@ -106,13 +106,14 @@ const HiraganaPracticeView = () => {
                 <div className="container-fluid px-0 px-sm-3">
                     <div className="row" style={{height: "45rem"}}>
                         <div className="col-md-7 px-5 h-100">
-                            <div className="card align-items-center mt-3 pb-3 text-white h-100" style={{backgroundColor: "#B98CB3" }}>
+                            <div className="card border-light align-items-center mt-3 pb-3 h-100">
                                 <div className="d-flex align-items-center w-100 pt-2">
-                                    <h2 className="card-title px-4">Practice Mode</h2>
-                                    <h4 className="card-subtitle ms-auto px-4 fw-light">Score: {score}</h4>
+                                    <h2 className="card-title px-4 fw-bold">Practice Mode</h2>
+                                    <h2 className="ms-auto px-4 fw-bold">Score:</h2>
+                                    <h2 className="fw-bold me-3" style={{color: "#b98cb3"}}>{score}</h2>
                                 </div>
                                 <div className="d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div className="cardHiragana h-75 w-100 mx-5" style={{ backgroundColor: "#D7BED4"}}>
+                                    <div className="cardHiragana h-75 w-100 mx-5">
                                         <p style={{fontSize: "20rem"}}>{currCharacter.questionText}</p>
                                     </div>
                                     <div className="hiraganaPractice h-75 w-100 me-5">
