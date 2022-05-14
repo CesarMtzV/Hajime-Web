@@ -2,10 +2,12 @@ from flask import Flask
 from flask_pymongo import PyMongo
 from os import getenv
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 app.config["MONGO_URI"] = getenv('MONGO_URI')
 mongo = PyMongo(app)
 db = mongo.db

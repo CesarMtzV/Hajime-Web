@@ -1,9 +1,11 @@
+// import axios from "axios";
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const LoginView = () => {
-
+const RegisterView = () => {
+    const [name, setName] = useState('');
     const [userName, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const navigate = useNavigate();
@@ -11,25 +13,27 @@ const LoginView = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const res = await fetch(`http://127.0.0.1:5000/users/login`,{
+        const res = await fetch(`http://127.0.0.1:5000/users/signup`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
+                name,
                 userName,
+                email,
                 password
             })
         })
+        const data = await res.json();
+        console.log(data['message']);
 
-        if(res.status === 200){
+        if (data['message'] !== 'Username already exists!'){
             navigate("/")
-        }else{
-            // DISPLAY ERROR MESSAGE
-            const data = await res.json();
-            console.log(data)
         }
-    }
+
+        
+    };
 
     return (
         <section style={{ backgroundColor: "#b98cb3" }}>
@@ -70,8 +74,21 @@ const LoginView = () => {
                                                 className="fw-normal mb-3 pb-3"
                                                 style={{ letterSpacing: "1px" }}
                                             >
-                                                Sign into your account
+                                                Register an account
                                             </h5>
+                                            {/* Name */}
+                                            <div className="form-outline mb-4">
+                                                <input
+                                                    type="text"
+                                                    className="form-control form-control-lg"
+                                                    value={name}
+                                                    onChange={e => setName(e.target.value)}
+                                                />
+                                                <label className="form-label">
+                                                    Name
+                                                </label>
+                                            </div>
+                                            {/* UserName */}
                                             <div className="form-outline mb-4">
                                                 <input
                                                     type="text"
@@ -79,13 +96,23 @@ const LoginView = () => {
                                                     value={userName}
                                                     onChange={e => setUsername(e.target.value)}
                                                 />
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form2Example17"
-                                                >
+                                                <label className="form-label">
                                                     Username
                                                 </label>
                                             </div>
+                                            {/* email */}
+                                            <div className="form-outline mb-4">
+                                                <input
+                                                    type="email"
+                                                    className="form-control form-control-lg"
+                                                    value={email}
+                                                    onChange={e => setEmail(e.target.value)}
+                                                />
+                                                <label className="form-label">
+                                                    E-mail
+                                                </label>
+                                            </div>
+                                            {/* PASSWORD */}
                                             <div className="form-outline mb-4">
                                                 <input
                                                     type="password"
@@ -93,10 +120,7 @@ const LoginView = () => {
                                                     value={password}
                                                     onChange={e => setPassword(e.target.value)}
                                                 />
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form2Example27"
-                                                >
+                                                <label className="form-label">
                                                     Password
                                                 </label>
                                             </div>
@@ -105,20 +129,19 @@ const LoginView = () => {
                                                     className="btn btn-dark btn-lg btn-block"
                                                     type="submit"
                                                 >
-                                                    Login
+                                                    Register
                                                 </button>
                                             </div>
                                             <p
                                                 className="mb-5 pb-lg-2"
                                                 style={{ color: "#393f81" }}
                                             >
-                                                Don't have an account?{" "}
+                                                Already have an account?{" "}
                                                 <NavLink
-                                                    to="/register"
+                                                    to="/login"
                                                     style={{ color: "#393f81" }}
-                                                    
                                                 >
-                                                    Register here
+                                                    Login
                                                 </NavLink>
                                             </p>
                                         </form>
@@ -133,4 +156,4 @@ const LoginView = () => {
     );
 };
 
-export default LoginView;
+export default RegisterView;
