@@ -16,7 +16,7 @@ const NavBar = () => {
                             <NavBtnLink to="/hiragana">Hiragana</NavBtnLink>
                         </NavBtn>
                         <NavBtn>
-                            <NavBtnLink to="/">Katakana</NavBtnLink>
+                            <NavBtnLink to="/katakana">Katakana</NavBtnLink>
                         </NavBtn>
                         <NavBtn>
                             <NavBtnLink to="/">Kanji</NavBtnLink>
