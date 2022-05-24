@@ -7,6 +7,7 @@ import HomeView from './views/HomeView';
 import LoginView from "./views/LoginView";
 import NavBar from "./components/NavBar/NavBar";
 import HiraganaPracticeView from "./views/HiraganaPracticeView";
+import KatakanaPracticeView from "./views/KatakanaPracticeView";
 
 const App = () => {
   return(
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={<HomeView />} />
         <Route path="/login" element={<LoginView />} />
         <Route path="/hiragana" element={<HiraganaPracticeView/>} />
+        <Route path="/katakana" element={<KatakanaPracticeView/>} />
       </Routes>
     </Router>
   );
