@@ -1,38 +1,38 @@
-// import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
+import { registerSchema } from "../static/schema";
 
 const RegisterView = () => {
-    const [name, setName] = useState('');
-    const [userName, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({ resolver: yupResolver(registerSchema) });
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = (data) => {
+        const name = data.name;
+        const userName = data.userName;
+        const email = data.email;
+        const password = data.password;
 
-        const res = await fetch(`http://127.0.0.1:5000/users/signup`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name,
-                userName,
-                email,
-                password
+        axios
+            .post("/api/users/signup", { name, userName, email, password })
+            .then((result) => {
+                if (result.data.message === "Username already exists!") {
+                    throw Error("An account already exists with that Username");
+                } else {
+                    navigate("/login");
+                }
             })
-        })
-        const data = await res.json();
-        console.log(data['message']);
-
-        if (data['message'] !== 'Username already exists!'){
-            navigate("/")
-        }
-
-        
+            .catch((e) => {
+                setError(e.message);
+            });
     };
 
     return (
@@ -56,7 +56,7 @@ const RegisterView = () => {
                                 {/* FORM DERECHA */}
                                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div className="card-body p-4 p-lg-5 text-black">
-                                        <form onSubmit={handleSubmit}>
+                                        <form onSubmit={handleSubmit(onSubmit)}>
                                             <div className="d-flex align-items-center mb-3 pb-1">
                                                 <span className="h1 fw-bold mb-0">
                                                     Hajime
@@ -81,9 +81,11 @@ const RegisterView = () => {
                                                 <input
                                                     type="text"
                                                     className="form-control form-control-lg"
-                                                    value={name}
-                                                    onChange={e => setName(e.target.value)}
+                                                    {...register("name")}
                                                 />
+                                                <p className="text-danger fst-italic">
+                                                    {errors.name?.message}
+                                                </p>
                                                 <label className="form-label">
                                                     Name
                                                 </label>
@@ -93,9 +95,11 @@ const RegisterView = () => {
                                                 <input
                                                     type="text"
                                                     className="form-control form-control-lg"
-                                                    value={userName}
-                                                    onChange={e => setUsername(e.target.value)}
+                                                    {...register("userName")}
                                                 />
+                                                <p className="text-danger fst-italic">
+                                                    {errors.userName?.message}
+                                                </p>
                                                 <label className="form-label">
                                                     Username
                                                 </label>
@@ -105,9 +109,11 @@ const RegisterView = () => {
                                                 <input
                                                     type="email"
                                                     className="form-control form-control-lg"
-                                                    value={email}
-                                                    onChange={e => setEmail(e.target.value)}
+                                                    {...register("email")}
                                                 />
+                                                <p className="text-danger fst-italic">
+                                                    {errors.email?.message}
+                                                </p>
                                                 <label className="form-label">
                                                     E-mail
                                                 </label>
@@ -117,9 +123,11 @@ const RegisterView = () => {
                                                 <input
                                                     type="password"
                                                     className="form-control form-control-lg"
-                                                    value={password}
-                                                    onChange={e => setPassword(e.target.value)}
+                                                    {...register("password")}
                                                 />
+                                                <p className="text-danger fst-italic">
+                                                    {errors.password?.message}
+                                                </p>
                                                 <label className="form-label">
                                                     Password
                                                 </label>
@@ -132,6 +140,11 @@ const RegisterView = () => {
                                                     Register
                                                 </button>
                                             </div>
+                                            {error && (
+                                                <p className="text-danger fst-italic">
+                                                    {error}
+                                                </p>
+                                            )}
                                             <p
                                                 className="mb-5 pb-lg-2"
                                                 style={{ color: "#393f81" }}

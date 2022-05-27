@@ -6,7 +6,7 @@ const HomeView = () => {
       <div className='row'>
         <div className="container px-5" style={{backgroundColor: "#b98cb3"}}>
           <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a href="/" className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-decoration-none">
+            <a href="#" className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-decoration-none">
               <h1 className='text-white fs-1'>Hajime</h1>
             </a>
             
@@ -64,26 +64,26 @@ const HomeView = () => {
                 <h2>Achievements</h2>
                 <div className='row achievements-card'>
                   <div className='col-md-3 d-flex flex-column align-items-center'>
-                    <div class="progress yellow"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                      <div class="progress-value">37.5%</div>
+                    <div className="progress yellow"> <span className="progress-left"> <span className="progress-bar"></span> </span> <span className="progress-right"> <span className="progress-bar"></span> </span>
+                      <div className="progress-value">37.5%</div>
                     </div>
                     <p>Random</p>
                   </div>
                   <div className='col-md-3  d-flex flex-column align-items-center'>
-                    <div class="progress blue"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                      <div class="progress-value">90%</div>
+                    <div className="progress blue"> <span className="progress-left"> <span className="progress-bar"></span> </span> <span className="progress-right"> <span className="progress-bar"></span> </span>
+                      <div className="progress-value">90%</div>
                     </div>
                     <p>New Record!</p>
                   </div>
                   <div className='col-md-3  d-flex flex-column align-items-center'>
-                    <div class="progress green"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                      <div class="progress-value">50%</div>
+                    <div className="progress green"> <span className="progress-left"> <span className="progress-bar"></span> </span> <span className="progress-right"> <span className="progress-bar"></span> </span>
+                      <div className="progress-value">50%</div>
                     </div>
                     <p>Artist</p>
                   </div>
                   <div className='col-md-3  d-flex flex-column align-items-center'>
-                    <div class="progress green"> <span class="progress-left"> <span class="progress-bar"></span> </span> <span class="progress-right"> <span class="progress-bar"></span> </span>
-                      <div class="progress-value">50%</div>
+                    <div className="progress green"> <span className="progress-left"> <span className="progress-bar"></span> </span> <span className="progress-right"> <span className="progress-bar"></span> </span>
+                      <div className="progress-value">50%</div>
                     </div>
                     <p>ヘルプ</p>
                   </div>

@@ -1,38 +1,49 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useAuth } from "../components/auth/auth";
+import { loginSchema } from "../static/schema";
 
 const LoginView = () => {
-
-    const [userName, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
+    const [error, setError] = useState(null);
+    const { setAuthToken, isLoggedIn, setLoggedIn } = useAuth();
     const navigate = useNavigate();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({ resolver: yupResolver(loginSchema) });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const onSubmit = (data) => {
+        const userName = data.userName;
+        const password = data.password;
 
-        const res = await fetch(`http://127.0.0.1:5000/users/login`,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                userName,
-                password
+        axios
+            .post("/api/users/login", { userName, password })
+            .then((result) => {
+                if (result.data) {
+                    setAuthToken(result.data);
+                    setLoggedIn(true);
+                    navigate("/home");
+                } else {
+                    throw Error("Incorrect login credentials");
+                }
             })
-        })
+            .catch((error) => {
+                if (error.response.status === 404) {
+                    setError("Failed login. Check credentials");
+                }
+            });
 
-        if(res.status === 200){
-            navigate("/")
-        }else{
-            // DISPLAY ERROR MESSAGE
-            const data = await res.json();
-            console.log(data)
+        if (isLoggedIn) {
+            navigate("/home");
         }
-    }
+    };
 
     return (
-        <section style={{ backgroundColor: "#b98cb3" }}>
+        <section style={{ backgroundColor: "#b98cb3", minHeight: "100vh" }}>
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col col-xl-10">
@@ -52,7 +63,7 @@ const LoginView = () => {
                                 {/* FORM DERECHA */}
                                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div className="card-body p-4 p-lg-5 text-black">
-                                        <form onSubmit={handleSubmit}>
+                                        <form onSubmit={handleSubmit(onSubmit)}>
                                             <div className="d-flex align-items-center mb-3 pb-1">
                                                 <span className="h1 fw-bold mb-0">
                                                     Hajime
@@ -72,13 +83,16 @@ const LoginView = () => {
                                             >
                                                 Sign into your account
                                             </h5>
+                                            {/* *****USERNAME***** */}
                                             <div className="form-outline mb-4">
                                                 <input
                                                     type="text"
                                                     className="form-control form-control-lg"
-                                                    value={userName}
-                                                    onChange={e => setUsername(e.target.value)}
+                                                    {...register("userName")}
                                                 />
+                                                <p className="text-danger fst-italic">
+                                                    {errors.userName?.message}
+                                                </p>
                                                 <label
                                                     className="form-label"
                                                     htmlFor="form2Example17"
@@ -86,13 +100,17 @@ const LoginView = () => {
                                                     Username
                                                 </label>
                                             </div>
+
+                                            {/* *****PASSWORD***** */}
                                             <div className="form-outline mb-4">
                                                 <input
                                                     type="password"
                                                     className="form-control form-control-lg"
-                                                    value={password}
-                                                    onChange={e => setPassword(e.target.value)}
+                                                    {...register("password")}
                                                 />
+                                                <p className="text-danger fst-italic">
+                                                    {errors.password?.message}
+                                                </p>
                                                 <label
                                                     className="form-label"
                                                     htmlFor="form2Example27"
@@ -108,6 +126,11 @@ const LoginView = () => {
                                                     Login
                                                 </button>
                                             </div>
+                                            {error && (
+                                                <p className="text-danger fst-italic">
+                                                    {error}
+                                                </p>
+                                            )}
                                             <p
                                                 className="mb-5 pb-lg-2"
                                                 style={{ color: "#393f81" }}
@@ -116,7 +139,6 @@ const LoginView = () => {
                                                 <NavLink
                                                     to="/register"
                                                     style={{ color: "#393f81" }}
-                                                    
                                                 >
                                                     Register here
                                                 </NavLink>
