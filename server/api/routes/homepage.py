@@ -18,4 +18,4 @@ def verify_token_middleware():
 @routes_homepage.route('/', methods=['GET'])
 def home():
     user = decode(token, key=getenv('SECRET'), algorithms=['HS256'])
-    return jsonify(user['userName'])
+    return jsonify(user["userName"])
