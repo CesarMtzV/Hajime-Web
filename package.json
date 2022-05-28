@@ -4,6 +4,10 @@
   "private": true,
   "proxy": "http://127.0.0.1:5000/",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@hookform/resolvers": "^2.8.10",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
@@ -15,12 +19,12 @@
     "react-awesome-button": "^6.5.1",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.31.2",
-    "yup": "^0.32.11",
     "react-hot-toast": "^2.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

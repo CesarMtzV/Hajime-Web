@@ -15,11 +15,10 @@ import {
     getLocalToken,
     setLocalToken,
 } from "./components/auth/auth";
-import NavBar from "./components/NavBar/NavBar";
 import HiraganaPracticeView from "./views/HiraganaPracticeView";
+import { AboutView } from "./views/AboutView";
 
 const App = () => {
-    // const [token, setToken] = useState(null)
     const [authToken, setAuthToken] = useState();
     const [email, setEmail] = useState();
     const [userName, setUserName] = useState();
@@ -73,7 +72,7 @@ const App = () => {
             <Router>
                 <Routes>
                     <Route path="/" element={<WelcomeView />} />
-                    {/* REVISAR SI HAY QUE CAMBIAR ESTO */}
+                    <Route path="/about" element={<AboutView />} />
                     <Route
                         path="/home"
                         element={
