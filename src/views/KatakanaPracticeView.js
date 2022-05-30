@@ -2,62 +2,62 @@ import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
 
-const hira  = { 
-    'あ' : 'A',
-    'い' : 'I',
-    'う' : 'U',
-    'え' : 'E',
-    'お' : 'O',
-    'か' : 'Ka',
-    'き' : 'Ki',
-    'く' : 'Ku',
-    'け' : 'Ke',
-    'こ' : 'Ko',
-    'さ' : 'Sa',
-    'し' : 'Shi',
-    'す' : 'Su',
-    'せ' : 'Se',
-    'そ' : 'So',
-    'た' : 'Ta',
-    'ち' : 'Chi',
-    'つ' : 'Tsu',
-    'て' : 'Te',
-    'と' : 'To',
-    'な' : 'Na',
-    'に' : 'Ni',
-    'ぬ' : 'Nu',
-    'ね' : 'Ne',
-    'の' : 'No',
-    'は' : 'Ha',
-    'ひ' : 'Hi',
-    'ふ' : 'Fu',
-    'へ' : 'He',
-    'ほ' : 'Ho',
-    'ま' : 'Ma',
-    'み' : 'Mi',
-    'む' : 'Mu',
-    'め' : 'Me',
-    'も' : 'Mo',
-    'や' : 'Ya',
-    'ゆ' : 'Yu',
-    'よ' : 'Yo',
-    'ら' : 'Ra',
-    'り' : 'Ri',
-    'る' : 'Ru',
-    'れ' : 'Re',
-    'ろ' : 'Ro',
-    'わ' : 'Wa',
-    'を' : 'Wo',
-    'ん' : 'N',
+const kata  = { 
+    'ア' : 'A',
+    'イ' : 'I',
+    'ウ' : 'U',
+    'エ' : 'E',
+    'オ' : 'O',
+    'カ' : 'Ka',
+    'キ' : 'Ki',
+    'ク' : 'Ku',
+    'ケ' : 'Ke',
+    'コ' : 'Ko',
+    'サ' : 'Sa',
+    'シ' : 'Shi',
+    'ス' : 'Su',
+    'セ' : 'Se',
+    'ソ' : 'So',
+    'タ' : 'Ta',
+    'チ' : 'Chi',
+    'ツ' : 'Tsu',
+    'テ' : 'Te',
+    'ト' : 'To',
+    'ナ' : 'Na',
+    'ニ' : 'Ni',
+    'ヌ' : 'Nu',
+    'ネ' : 'Ne',
+    'ノ' : 'No',
+    'ハ' : 'Ha',
+    'ヒ' : 'Hi',
+    'フ' : 'Fu',
+    'ヘ' : 'He',
+    'ホ' : 'Ho',
+    'マ' : 'Ma',
+    'ミ' : 'Mi',
+    'ム' : 'Mu',
+    'メ' : 'Me',
+    'モ' : 'Mo',
+    'ヤ' : 'Ya',
+    'ユ' : 'Yu',
+    'ヨ' : 'Yo',
+    'ラ' : 'Ra',
+    'リ' : 'Ri',
+    'ル' : 'Ru',
+    'レ' : 'Re',
+    'ロ' : 'Ro',
+    'ワ' : 'Wa',
+    'ヲ' : 'Wo',
+    'ン' : 'n',
 };
 
 function shuffleArray(arr) {
     return arr.sort((a, b) => 0.5 - Math.random());
 }
 
-const HiraganaPracticeView = () => {
-    const keys = Object.keys(hira);
-    const values = Object.values(hira);
+const KatakanaPracticeView = () => {
+    const keys = Object.keys(kata);
+    const values = Object.values(kata);
 
     var x = Math.floor(Math.random() * keys.length);
     const [showQuiz, setQuizMode] = useState(false);
@@ -199,14 +199,14 @@ const HiraganaPracticeView = () => {
                             </div>
                             <div className="col-md-5 h-100 mt-3">
                                 <div className="hiraganaContainer mx-4 scroll">
-                                    {Object.keys(hira).map((key, index) => {
+                                    {Object.keys(kata).map((key, index) => {
                                         return (
                                             <motion.div 
                                                 className="hiraganaCard" 
                                                 key={key}
                                                 whileHover={{scale: 1.1}}>
                                                 <p className="mainCharacter">{key}</p>
-                                                <p style={{fontSize: "25px"}}>{hira[key]}</p>
+                                                <p style={{fontSize: "25px"}}>{kata[key]}</p>
                                             </motion.div>
                                         )
                                     })}
@@ -220,4 +220,4 @@ const HiraganaPracticeView = () => {
     )
 }
 
-export default HiraganaPracticeView
+export default KatakanaPracticeView
