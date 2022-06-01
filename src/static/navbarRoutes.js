@@ -27,7 +27,7 @@ const loggedIn_routes = [
         name: "Hiragana",
     },
     {
-        route: "/",
+        route: "/katakana",
         name: "Katakana",
     },
     {
