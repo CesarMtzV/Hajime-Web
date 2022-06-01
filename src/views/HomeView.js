@@ -1,10 +1,6 @@
-import NavBar from "../components/NavBar/NavBar";
-import { loggedIn_routes } from "../static/navbarRoutes";
-
 const HomeView = () => {
     return (
         <>
-            <NavBar navbarRoutes={loggedIn_routes} />
             <div className="main-content">
                 <div className="container-fluid px-0 px-sm-3">
                     <div className="row pt-3 px-5" style={{ height: "80vh" }}>

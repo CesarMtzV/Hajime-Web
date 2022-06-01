@@ -19,7 +19,7 @@ const welcomeView_routes = [
 
 const loggedIn_routes = [
     {
-        route: "/",
+        route: "/home",
         name: "Home",
     },
     {
