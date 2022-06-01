@@ -16,6 +16,7 @@ import {
     setLocalToken,
 } from "./components/auth/auth";
 import HiraganaPracticeView from "./views/HiraganaPracticeView";
+import KatakanaPracticaView from "./views/KatakanaPracticeView";
 import { AboutView } from "./views/AboutView";
 
 const App = () => {
@@ -83,7 +84,19 @@ const App = () => {
                     />
                     <Route
                         path="/hiragana"
-                        element={<HiraganaPracticeView />}
+                        element={
+                            <ProtectedRoute token={authToken}>
+                                <HiraganaPracticeView />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/katakana"
+                        element={
+                            <ProtectedRoute token={authToken}>
+                                <KatakanaPracticaView />
+                            </ProtectedRoute>
+                        }
                     />
                     <Route path="/login" element={<LoginView />} />
                     <Route path="/register" element={<RegisterView />} />
