@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Blueprint, jsonify, request
 from jwt_functions import write_token, validate_token
 import bcrypt
