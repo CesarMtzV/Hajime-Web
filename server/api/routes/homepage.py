@@ -1,8 +1,10 @@
+import json
 from flask import Blueprint, request, jsonify
 from jwt import decode
 from jwt_functions import validate_token
 from os import getenv
 from dotenv import load_dotenv
+import bson.json_util as json_util
 
 load_dotenv()
 
@@ -17,5 +19,11 @@ def verify_token_middleware():
 
 @routes_homepage.route('/', methods=['GET'])
 def home():
+    from api import db
+
     user = decode(token, key=getenv('SECRET'), algorithms=['HS256'])
-    return jsonify(user["userName"])
+    user_data = db.users.find_one({
+        'userName': user["userName"]
+    })
+
+    return json_util.dumps(user_data)
