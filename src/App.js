@@ -18,6 +18,7 @@ import {
 import HiraganaPracticeView from "./views/HiraganaPracticeView";
 import KatakanaPracticaView from "./views/KatakanaPracticeView";
 import { AboutView } from "./views/AboutView";
+import { ProfileView } from "./views/ProfileView";
 
 const App = () => {
     const [authToken, setAuthToken] = useState();
@@ -52,7 +53,6 @@ const App = () => {
     };
 
     if (render) {
-        // setRender(false);
         getLocalToken(setData, setRender);
         return <></>;
     }
@@ -95,6 +95,14 @@ const App = () => {
                         element={
                             <ProtectedRoute token={authToken}>
                                 <KatakanaPracticaView />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute token={authToken}>
+                                <ProfileView />
                             </ProtectedRoute>
                         }
                     />

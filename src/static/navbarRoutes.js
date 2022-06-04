@@ -19,7 +19,7 @@ const welcomeView_routes = [
 
 const loggedIn_routes = [
     {
-        route: "/",
+        route: "/home",
         name: "Home",
     },
     {
@@ -33,6 +33,10 @@ const loggedIn_routes = [
     {
         route: "/",
         name: "Kanji",
+    },
+    {
+        route: "/profile",
+        name: "Profile",
     },
 ];
 
