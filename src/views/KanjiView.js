@@ -7,7 +7,7 @@ export const KanjiView = () => {
     return (
         <>
             <NavBar navbarRoutes={loggedIn_routes} />
-            <div className="container border border-danger">
+            <div className="container">
                 <h1 className="my-5">Your Kanji sets</h1>
 
                 <div className="row">

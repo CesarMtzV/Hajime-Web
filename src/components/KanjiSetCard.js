@@ -3,7 +3,7 @@ import "../style.css"
 
 export const KanjiSetCard = ({title, numberOfKanji}) => {
   return (
-    <div className="col-12 col-sm-6 col-lg-3 p-2 border border-primary">
+    <div className="col-12 col-sm-6 col-lg-3 p-2">
         <div 
             className='p-3 rounded raise'
             style={{backgroundColor: "#b98cb3", color:"white", cursor: "pointer"}}
