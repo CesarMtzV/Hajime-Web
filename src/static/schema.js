@@ -1,5 +1,9 @@
 import * as yup from "yup";
 
+const kanjiSetSchema = yup.object({
+    title: yup.string().required("You must type a title for the set"),
+});
+
 const loginSchema = yup.object({
     userName: yup.string().required("Username is required"),
     password: yup.string().required("Password is required"),
@@ -18,4 +22,4 @@ const registerSchema = yup.object({
         .min(6, "Password must be at least 6 characters"),
 });
 
-export { loginSchema, registerSchema };
+export { loginSchema, registerSchema, kanjiSetSchema };
