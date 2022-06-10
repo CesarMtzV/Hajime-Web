@@ -1,49 +1,42 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useAuth } from "../components/auth/auth";
-import { loginSchema } from "../static/schema";
+import { registerSchema } from "../static/schema";
 
-const LoginView = () => {
+const RegisterView = () => {
     const [error, setError] = useState(null);
-    const { setAuthToken, isLoggedIn, setLoggedIn } = useAuth();
-    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ resolver: yupResolver(loginSchema) });
+    } = useForm({ resolver: yupResolver(registerSchema) });
+
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
+        const name = data.name;
         const userName = data.userName;
+        const email = data.email;
         const password = data.password;
 
         axios
-            .post("/api/users/login", { userName, password })
+            .post("/api/users/signup", { name, userName, email, password })
             .then((result) => {
-                if (result.data) {
-                    setAuthToken(result.data);
-                    setLoggedIn(true);
-                    navigate("/home");
+                if (result.data.message === "Username already exists!") {
+                    throw Error("An account already exists with that Username");
                 } else {
-                    throw Error("Incorrect login credentials");
+                    navigate("/login");
                 }
             })
-            .catch((error) => {
-                if (error.response.status === 404) {
-                    setError("Failed login. Check credentials");
-                }
+            .catch((e) => {
+                setError(e.message);
             });
-
-        if (isLoggedIn) {
-            navigate("/home");
-        }
     };
 
     return (
-        <section style={{ backgroundColor: "#b98cb3", minHeight: "100vh" }}>
+        <section style={{ backgroundColor: "#b98cb3" }}>
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col col-xl-10">
@@ -81,9 +74,23 @@ const LoginView = () => {
                                                 className="fw-normal mb-3 pb-3"
                                                 style={{ letterSpacing: "1px" }}
                                             >
-                                                Sign into your account
+                                                Register an account
                                             </h5>
-                                            {/* *****USERNAME***** */}
+                                            {/* Name */}
+                                            <div className="form-outline mb-4">
+                                                <input
+                                                    type="text"
+                                                    className="form-control form-control-lg"
+                                                    {...register("name")}
+                                                />
+                                                <p className="text-danger fst-italic">
+                                                    {errors.name?.message}
+                                                </p>
+                                                <label className="form-label">
+                                                    Name
+                                                </label>
+                                            </div>
+                                            {/* UserName */}
                                             <div className="form-outline mb-4">
                                                 <input
                                                     type="text"
@@ -93,15 +100,25 @@ const LoginView = () => {
                                                 <p className="text-danger fst-italic">
                                                     {errors.userName?.message}
                                                 </p>
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form2Example17"
-                                                >
+                                                <label className="form-label">
                                                     Username
                                                 </label>
                                             </div>
-
-                                            {/* *****PASSWORD***** */}
+                                            {/* email */}
+                                            <div className="form-outline mb-4">
+                                                <input
+                                                    type="email"
+                                                    className="form-control form-control-lg"
+                                                    {...register("email")}
+                                                />
+                                                <p className="text-danger fst-italic">
+                                                    {errors.email?.message}
+                                                </p>
+                                                <label className="form-label">
+                                                    E-mail
+                                                </label>
+                                            </div>
+                                            {/* PASSWORD */}
                                             <div className="form-outline mb-4">
                                                 <input
                                                     type="password"
@@ -111,10 +128,7 @@ const LoginView = () => {
                                                 <p className="text-danger fst-italic">
                                                     {errors.password?.message}
                                                 </p>
-                                                <label
-                                                    className="form-label"
-                                                    htmlFor="form2Example27"
-                                                >
+                                                <label className="form-label">
                                                     Password
                                                 </label>
                                             </div>
@@ -123,7 +137,7 @@ const LoginView = () => {
                                                     className="btn btn-dark btn-lg btn-block"
                                                     type="submit"
                                                 >
-                                                    Login
+                                                    Register
                                                 </button>
                                             </div>
                                             {error && (
@@ -135,12 +149,12 @@ const LoginView = () => {
                                                 className="mb-5 pb-lg-2"
                                                 style={{ color: "#393f81" }}
                                             >
-                                                Don't have an account?{" "}
+                                                Already have an account?{" "}
                                                 <NavLink
-                                                    to="/register"
+                                                    to="/login"
                                                     style={{ color: "#393f81" }}
                                                 >
-                                                    Register here
+                                                    Login
                                                 </NavLink>
                                             </p>
                                         </form>
@@ -155,4 +169,4 @@ const LoginView = () => {
     );
 };
 
-export default LoginView;
+export default RegisterView;
