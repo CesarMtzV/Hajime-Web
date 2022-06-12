@@ -1,3 +1,4 @@
+from crypt import methods
 import json
 from flask import Blueprint, request, jsonify
 from jwt import decode
@@ -28,6 +29,39 @@ def get_kanji_sets():
     return jsonify({
         "body": sets['kanji_sets']
     })
+
+@routes_kanji.route('/set/character', methods=['POST'])
+def add_kanji_character():
+    from api import db
+
+    # Check if user exists
+    user = db.users.find_one({
+        'userName': request.json['userName']
+    })
+    if not user:
+        return jsonify({
+            "status_code": 404,
+            "body": "User not found"
+        }), 404
+    
+    # Add new character to array
+    for index, set in enumerate(user["kanji_sets"]):
+        # print(index, set['title'])
+        if set['title'] == request.json['set_title']:
+            new_kanji = db.users.update_one(
+                { "userName": request.json["userName"], f'kanji_sets.{index}.title': request.json['set_title'] },
+                { "$push": { f'kanji_sets.{index}.kanji': request.json["kanji"] } }
+            )
+            print(new_kanji.modified_count)
+    
+    
+    
+    
+
+    return jsonify({
+        "status_code":200,
+        "body": "Kanji added succesfully!"
+    }), 200
 
 # POST: Nuevo set de kanji (title)
 @routes_kanji.route('/set', methods=['POST'])

@@ -20,6 +20,7 @@ import KatakanaPracticaView from "./views/KatakanaPracticeView";
 import { AboutView } from "./views/AboutView";
 import { ProfileView } from "./views/ProfileView";
 import { KanjiView } from "./views/KanjiView";
+import { KanjiSetView } from "./views/KanjiSetView";
 
 const App = () => {
     const [authToken, setAuthToken] = useState();
@@ -112,6 +113,14 @@ const App = () => {
                         element={
                             <ProtectedRoute token={authToken}>
                                 <KanjiView />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/kanji/:set"
+                        element={
+                            <ProtectedRoute token={authToken}>
+                                <KanjiSetView />
                             </ProtectedRoute>
                         }
                     />
