@@ -18,18 +18,7 @@ def verify_token_middleware():
     token = request.headers['Authorization'].split(" ")[1]
     validate_token(token, display=False)
 
-# ESTA FUNCION ES DE PRUEBA - BORRARLA CUANDO YA SE ACABE EL DEV
-# GET: User Kanji sets
-@routes_kanji.route('/set', methods=["GET"])
-def get_kanji_sets():
-    from api import db
-
-    sets = db.users.find_one({ "userName": request.json["userName"] })
-
-    return jsonify({
-        "body": sets['kanji_sets']
-    })
-
+# POST: Nuevo Kanji agregado al set (Kanji, strokes, pronunciaciones, significado, ejemplos)
 @routes_kanji.route('/set/character', methods=['POST'])
 def add_kanji_character():
     from api import db
@@ -46,16 +35,12 @@ def add_kanji_character():
     
     # Add new character to array
     for index, set in enumerate(user["kanji_sets"]):
-        # print(index, set['title'])
         if set['title'] == request.json['set_title']:
             new_kanji = db.users.update_one(
                 { "userName": request.json["userName"], f'kanji_sets.{index}.title': request.json['set_title'] },
                 { "$push": { f'kanji_sets.{index}.kanji': request.json["kanji"] } }
             )
-            print(new_kanji.modified_count)
-    
-    
-    
+            # print(new_kanji.modified_count)
     
 
     return jsonify({
@@ -100,5 +85,3 @@ def add_kanji_set():
             "status_code": 404,
             "body": "Kanji set already exists"
     }), 404
-
-# POST: Nuevo Kanji agregado al set (Kanji, pronunciaciones, significado, ejemplos)
