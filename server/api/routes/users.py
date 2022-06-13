@@ -17,6 +17,7 @@ def signup():
             'userName': request.json['userName'],
             'email': request.json['email'],
             'password': hashpw,
+            'kanji_sets': []
         })
         return jsonify({'message': 'Account created succesfully!'})
     return jsonify({'message': 'Username already exists!'})
@@ -26,7 +27,6 @@ def signup():
 def login():
     from api import db
     user = db.users.find_one({'userName': request.json['userName']})
-    print(user)
     if user:
         if bcrypt.checkpw(request.json['password'].encode('UTF-8'), user['password']):
             return write_token(data=request.get_json())
@@ -43,7 +43,4 @@ def login():
 @routes_users.route('/verifytoken', methods=['GET'])
 def verify():
     token = request.headers['Authorization'].split(" ")[1]
-    print("*********HELLO THERE********")
-    print(token)
-    # token = request.headers['Authorization']
     return validate_token(token, display=True)

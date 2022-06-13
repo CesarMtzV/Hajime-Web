@@ -63,68 +63,68 @@ const HomeView = () => {
                                         <h2>Achievements</h2>
                                         <div className="row achievements-card">
                                             <div className="col-md-3 d-flex flex-column align-items-center">
-                                                <div class="progress yellow">
+                                                <div className="progress yellow">
                                                     {" "}
-                                                    <span class="progress-left">
+                                                    <span className="progress-left">
                                                         {" "}
-                                                        <span class="progress-bar"></span>{" "}
+                                                        <span className="progress-bar"></span>{" "}
                                                     </span>{" "}
-                                                    <span class="progress-right">
+                                                    <span className="progress-right">
                                                         {" "}
-                                                        <span class="progress-bar"></span>{" "}
+                                                        <span className="progress-bar"></span>{" "}
                                                     </span>
-                                                    <div class="progress-value">
+                                                    <div className="progress-value">
                                                         37.5%
                                                     </div>
                                                 </div>
                                                 <p>Random</p>
                                             </div>
                                             <div className="col-md-3  d-flex flex-column align-items-center">
-                                                <div class="progress blue">
+                                                <div className="progress blue">
                                                     {" "}
-                                                    <span class="progress-left">
+                                                    <span className="progress-left">
                                                         {" "}
-                                                        <span class="progress-bar"></span>{" "}
+                                                        <span className="progress-bar"></span>{" "}
                                                     </span>{" "}
-                                                    <span class="progress-right">
+                                                    <span className="progress-right">
                                                         {" "}
-                                                        <span class="progress-bar"></span>{" "}
+                                                        <span className="progress-bar"></span>{" "}
                                                     </span>
-                                                    <div class="progress-value">
+                                                    <div className="progress-value">
                                                         90%
                                                     </div>
                                                 </div>
                                                 <p>New Record!</p>
                                             </div>
                                             <div className="col-md-3  d-flex flex-column align-items-center">
-                                                <div class="progress green">
+                                                <div className="progress green">
                                                     {" "}
-                                                    <span class="progress-left">
+                                                    <span className="progress-left">
                                                         {" "}
-                                                        <span class="progress-bar"></span>{" "}
+                                                        <span className="progress-bar"></span>{" "}
                                                     </span>{" "}
-                                                    <span class="progress-right">
+                                                    <span className="progress-right">
                                                         {" "}
-                                                        <span class="progress-bar"></span>{" "}
+                                                        <span className="progress-bar"></span>{" "}
                                                     </span>
-                                                    <div class="progress-value">
+                                                    <div className="progress-value">
                                                         50%
                                                     </div>
                                                 </div>
                                                 <p>Artist</p>
                                             </div>
                                             <div className="col-md-3  d-flex flex-column align-items-center">
-                                                <div class="progress green">
+                                                <div className="progress green">
                                                     {" "}
-                                                    <span class="progress-left">
+                                                    <span className="progress-left">
                                                         {" "}
-                                                        <span class="progress-bar"></span>{" "}
+                                                        <span className="progress-bar"></span>{" "}
                                                     </span>{" "}
-                                                    <span class="progress-right">
+                                                    <span className="progress-right">
                                                         {" "}
-                                                        <span class="progress-bar"></span>{" "}
+                                                        <span className="progress-bar"></span>{" "}
                                                     </span>
-                                                    <div class="progress-value">
+                                                    <div className="progress-value">
                                                         50%
                                                     </div>
                                                 </div>
