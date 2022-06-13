@@ -11,7 +11,7 @@ export function useAuth() {
 
 export function getLocalToken(setData, setRender) {
     var token = localStorage.getItem("token");
-
+    
     if (!token) {
         setRender(false);
         return;

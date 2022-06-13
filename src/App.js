@@ -18,9 +18,8 @@ import {
 import HiraganaPracticeView from "./views/HiraganaPracticeView";
 import KatakanaPracticaView from "./views/KatakanaPracticeView";
 import { AboutView } from "./views/AboutView";
-import { ProfileView } from "./views/ProfileView";
-import { KanjiView } from "./views/KanjiView";
-import { KanjiSetView } from "./views/KanjiSetView";
+import NavBar from "./components/NavBar/NavBar";
+import { loggedIn_routes } from "./static/navbarRoutes";
 
 const App = () => {
     const [authToken, setAuthToken] = useState();
@@ -67,6 +66,7 @@ const App = () => {
     }
 
     return (
+        
         <AuthContext.Provider
             value={{
                 authToken,
@@ -81,6 +81,8 @@ const App = () => {
             }}
         >
             <Router>
+                {console.log(isLoggedIn)}
+                {isLoggedIn ? <NavBar navbarRoutes={loggedIn_routes} /> : <></>}
                 <Routes>
                     <Route path="/" element={<WelcomeView />} />
                     <Route path="/about" element={<AboutView />} />
