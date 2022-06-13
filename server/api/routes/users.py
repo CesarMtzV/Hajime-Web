@@ -17,6 +17,7 @@ def signup():
             'userName': request.json['userName'],
             'email': request.json['email'],
             'password': hashpw,
+            'kanji_sets': []
         })
         return jsonify({'message': 'Account created succesfully!'})
     return jsonify({'message': 'Username already exists!'})

@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import HomeView from "./views/HomeView";
@@ -19,6 +19,8 @@ import HiraganaPracticeView from "./views/HiraganaPracticeView";
 import KatakanaPracticaView from "./views/KatakanaPracticeView";
 import { AboutView } from "./views/AboutView";
 import { ProfileView } from "./views/ProfileView";
+import { KanjiView } from "./views/KanjiView";
+import { KanjiSetView } from "./views/KanjiSetView";
 
 const App = () => {
     const [authToken, setAuthToken] = useState();
@@ -27,11 +29,13 @@ const App = () => {
     const [name, setName] = useState();
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [render, setRender] = useState(true);
+    const [kanjiSets, setKanjiSets] = useState([]);
 
     const setToken = (token) => {
         setAuthToken(token);
         setLocalToken(token);
         setRender(true);
+        getLocalToken(setData, setRender);
     };
 
     // Es la función que se mandará a la función de getLocalToken
@@ -39,6 +43,7 @@ const App = () => {
         setEmail(data.email);
         setUserName(data.userName);
         setName(data.name);
+        setKanjiSets(data.kanji_sets)
         setAuthToken(data.token);
         setLoggedIn(true);
     };
@@ -48,12 +53,16 @@ const App = () => {
         setEmail(undefined);
         setAuthToken(undefined);
         setName(undefined);
+        setKanjiSets(undefined);
         setUserName(undefined);
         localStorage.removeItem("token");
     };
 
-    if (render) {
+    useEffect(() => {
         getLocalToken(setData, setRender);
+    }, [])
+
+    if (render) {
         return <></>;
     }
 
@@ -65,6 +74,7 @@ const App = () => {
                 email,
                 name,
                 userName,
+                kanjiSets,
                 isLoggedIn,
                 setLoggedIn,
                 destroySession,
@@ -95,6 +105,22 @@ const App = () => {
                         element={
                             <ProtectedRoute token={authToken}>
                                 <KatakanaPracticaView />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/kanji"
+                        element={
+                            <ProtectedRoute token={authToken}>
+                                <KanjiView />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/kanji/:set"
+                        element={
+                            <ProtectedRoute token={authToken}>
+                                <KanjiSetView />
                             </ProtectedRoute>
                         }
                     />
