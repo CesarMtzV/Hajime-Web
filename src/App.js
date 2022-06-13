@@ -20,6 +20,9 @@ import KatakanaPracticaView from "./views/KatakanaPracticeView";
 import { AboutView } from "./views/AboutView";
 import NavBar from "./components/NavBar/NavBar";
 import { loggedIn_routes } from "./static/navbarRoutes";
+import { ProfileView } from "./views/ProfileView";
+import { KanjiView } from "./views/KanjiView";
+import { KanjiSetView } from "./views/KanjiSetView";
 
 const App = () => {
     const [authToken, setAuthToken] = useState();
