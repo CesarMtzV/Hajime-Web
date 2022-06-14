@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const hira  = { 
     'あ' : 'A',
@@ -73,6 +74,40 @@ const HiraganaPracticeView = () => {
             ])});
     const [practiceScore, setPracticeScore] = useState(0);
     const [quizScore, setQuizScore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            var token = localStorage.getItem("token");
+
+            const data = await fetch("/api/achievements/hiraganaHighScore", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            let score;
+            if (data) {
+                score = await data.json();
+            }
+
+            if (score) {                   
+                setHighScore(score.hiraganaHighScore);
+            }
+        }
+
+        fetchData();
+    }, [setQuizScore])
+
+    const updateHighScore = async (quizScore) => {
+        var token = localStorage.getItem("token");
+
+        await axios.post("/api/achievements/hiraganaHighScore", {'hiraganaHighScore': quizScore}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    }
 
     const handleAnswerOptionClick = (isCorrect) => {
         var aux = Math.floor(Math.random() * keys.length);
@@ -85,13 +120,20 @@ const HiraganaPracticeView = () => {
                 setPracticeScore(practiceScore + 1);
             } else {
                 toast.error("Try again!", {duration: 1000});
+                setPracticeScore(0);
             }
         } else {
             if(isCorrect) {
                 toast.success("Nice!", {duration: 1000});
                 setQuizScore(quizScore + 1);
+
+                if (quizScore + 1 > highScore) {
+                    setHighScore(quizScore + 1);
+                    updateHighScore(quizScore + 1);
+                }
             } else {
                 toast.error("Try again!", {duration: 1000});
+                setQuizScore(0);
             }
         }
 
@@ -136,7 +178,7 @@ const HiraganaPracticeView = () => {
                                 <h2 className="card-title px-4 fw-bold">Quiz Mode</h2>
                                 <div className="ms-auto d-flex">
                                     <h2 className="px-4 fw-bold">High Score:</h2>
-                                    <h2 className="fw-bold me-3" style={{color: "#b98cb3"}}>{quizScore}</h2>
+                                    <h2 className="fw-bold me-3" style={{color: "#b98cb3"}}>{highScore}</h2>
                                     <h2 className="ms-auto px-4 fw-bold">Score:</h2>
                                     <h2 className="fw-bold me-3" style={{color: "#b98cb3"}}>{quizScore}</h2>
                                 </div>
