@@ -1,7 +1,41 @@
+import React, { useState, useEffect } from 'react'
 import NavBar from "../components/NavBar/NavBar";
 import { loggedIn_routes } from "../static/navbarRoutes";
 
 const HomeView = () => {
+    const [randomKanji, setRandomKanji] = useState();
+
+    const generateKanji =  async () => {
+        const randomGrade = Math.floor(Math.random() * 5) + 1;
+        const grade = await fetch(`https://kanjiapi.dev/v1/kanji/grade-${randomGrade}`);
+
+        let data
+        if (grade)
+        data = await grade.json();
+
+        let kanji, kanjiJson;
+        if (data) {
+        const randomKanji = Math.floor(Math.random() * data.length);
+        kanji = await fetch(`https://kanjiapi.dev/v1/kanji/${data[randomKanji]}`);
+
+        if (kanji)
+            kanjiJson = await kanji.json();
+        }
+
+        if (kanjiJson)
+        setRandomKanji(kanjiJson);
+    }
+
+    useEffect(() => {
+        generateKanji();
+    }, [setRandomKanji]);
+    
+
+    const handleGenerate = async (e) => {
+        e.preventDefault();
+        generateKanji();
+    }
+
     return (
         <>
             <NavBar navbarRoutes={loggedIn_routes} />
@@ -17,32 +51,40 @@ const HomeView = () => {
                                 <div className="kanji-info py-4">
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <h1>妙</h1>
+                                            <h1>{randomKanji && randomKanji.kanji}</h1>
                                         </div>
                                         <div className="col-md-6">
                                             <h4>Number of strokes:</h4>
-                                            <p>6</p>
+                                            <p>{randomKanji && randomKanji.stroke_count}</p>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <h4>Kun reading:</h4>
-                                            <p>な</p>
-                                            <p>なに</p>
+                                            {randomKanji && randomKanji.kun_readings.map(kun => {
+                                                return(
+                                                    <p>{kun}</p>
+                                                );
+                                            })}
                                         </div>
                                         <div className="col-md-6">
                                             <h4>On reading:</h4>
-                                            <p>ソナ</p>
-                                            <p>シフノ</p>
+                                            {randomKanji && randomKanji.on_readings.map(on => {
+                                                return(
+                                                    <p>{on}</p>
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="meaning-div">
                                     <h3>Meaning:</h3>
                                     <ul>
-                                        <li>Name</li>
-                                        <li>Noted</li>
-                                        <li>Particular</li>
+                                        {randomKanji && randomKanji.meanings.map(meaning => {
+                                            return(
+                                                <p>{meaning}</p>
+                                            );
+                                        })}
                                     </ul>
                                 </div>
                                 <button
@@ -52,6 +94,7 @@ const HomeView = () => {
                                         width: "100px",
                                         backgroundColor: "#a871a0",
                                     }}
+                                    onClick={handleGenerate}
                                 >
                                     Generate
                                 </button>
