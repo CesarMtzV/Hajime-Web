@@ -17,7 +17,34 @@ export const KanjiView = () => {
     } = useForm({ resolver: yupResolver(kanjiSetSchema) });
     const [error, setError] = useState(null);
 
-    const onSubmit = (data) => {
+    const getAchievements = async () => {
+        var token = localStorage.getItem("token");
+        
+        const data = await fetch("/api/achievements/getAchievements", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        let achievements;
+        if (data) {
+            achievements = await data.json();
+        }
+
+        return(achievements.achievements);
+    }
+
+    const updateAchievements = async (updatedAchievements) => {
+        var token = localStorage.getItem("token");
+
+        await axios.post("/api/achievements/setAchievements", {'updatedAchievements': updatedAchievements}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    }
+
+    const onSubmit = async (data) => {
         const kanji_set = {
             title: data.title,
             kanji: [],
@@ -25,7 +52,19 @@ export const KanjiView = () => {
 
         axios
             .post("/api/kanji/set", { userName, kanji_set })
-            .then((result) => {
+            .then(async (result) => {
+                const ach = await getAchievements();
+
+                if (ach[5].progress !== 1) {
+                    ach[5].progress = 1;
+                    await updateAchievements(ach);
+                }
+
+                if (ach[6].progress < 1) {
+                    ach[6].progress += 0.1;
+                    await updateAchievements(ach);
+                }
+
                 setButtonPopup(false);
                 window.location.reload();
             })

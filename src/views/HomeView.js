@@ -60,7 +60,7 @@ const HomeView = () => {
                 const aux = achievements;
                 aux[4].progress = 1;
                 setAchievements(aux);
-                updateAchievements(aux);
+                await updateAchievements(aux);
             }
         }
     }

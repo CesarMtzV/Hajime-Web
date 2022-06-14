@@ -16,17 +16,49 @@ const LoginView = () => {
         formState: { errors },
     } = useForm({ resolver: yupResolver(loginSchema) });
 
-    const onSubmit = (data) => {
+    const getAchievements = async () => {
+        var token = localStorage.getItem("token");
+        
+        const data = await fetch("/api/achievements/getAchievements", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        let achievements;
+        if (data) {
+            achievements = await data.json();
+        }
+
+        return(achievements.achievements);
+    }
+
+    const updateAchievements = async (updatedAchievements) => {
+        var token = localStorage.getItem("token");
+
+        await axios.post("/api/achievements/setAchievements", {'updatedAchievements': updatedAchievements}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    }
+
+    const onSubmit = async (data) => {
         const userName = data.userName;
         const password = data.password;
 
         axios
             .post("/api/users/login", { userName, password })
-            .then((result) => {
+            .then(async (result) => {
                 if (result.data) {
                     setAuthToken(result.data);
                     setLoggedIn(true);
                     navigate("/home");
+                    const ach = await getAchievements();
+                    if (ach[7].progress < 1) {
+                        ach[7].progress += 0.1;
+                        await updateAchievements(ach);
+                    }
                 } else {
                     throw Error("Incorrect login credentials");
                 }
