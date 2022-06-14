@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { KanjiSetCard } from "../components/Kanji/KanjiSetCard";
 import NavBar from "../components/NavBar/NavBar";
-import { loggedIn_routes } from "../static/navbarRoutes";
 import { useAuth } from "../components/auth/auth";
 import { Popup } from "../components/popup/Popup";
 import { useForm } from "react-hook-form";
@@ -40,7 +39,6 @@ export const KanjiView = () => {
 
     return (
         <>
-            <NavBar navbarRoutes={loggedIn_routes} />
             <div className="container">
                 <h1 className="my-5">Your Kanji sets</h1>
 
