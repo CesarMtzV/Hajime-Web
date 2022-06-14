@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify, request
-from jwt_functions import write_token, validate_token
+from jwt_functions import write_token, validate_token, decode
 import bcrypt
+from os import getenv
+from dotenv import load_dotenv
 
 routes_users = Blueprint('routes_users', __name__)
 
@@ -17,6 +19,7 @@ def signup():
             'userName': request.json['userName'],
             'email': request.json['email'],
             'password': hashpw,
+            'pp': "//ssl.gstatic.com/accounts/ui/avatar_2x.png",
             'kanji_sets': [],
             'achievements': [
                 {
@@ -88,6 +91,21 @@ def login():
     response.status_code = 404
     return response
 
+@routes_users.route('/setpp', methods=['POST'])
+def set_pp():
+    from api import db
+
+    token = request.headers['Authorization'].split(" ")[1]
+    validate_token(token, display=False)
+
+    user = decode(token, key=getenv('SECRET'), algorithms=['HS256'])
+
+    db.users.update_one(
+        {'userName': user['userName']},
+        {'$set': {'pp': request.json['pp']}}
+    )
+
+    return jsonify({'message': 'New profile picture set succesfully!'})
 
 @routes_users.route('/verifytoken', methods=['GET'])
 def verify():
