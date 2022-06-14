@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../components/auth/auth";
-import { Popup } from "../components/popup/Popup";
 import { kanjiCharacterSchema } from "../static/schema";
 import axios from "axios";
 import { KanjiCard } from "../components/Kanji/KanjiCard";
+import NewModal from "../components/NewModal/NewModal";
+import { motion } from "framer-motion";
 
 export const KanjiSetView = () => {
     const params = useParams();
@@ -113,12 +114,14 @@ export const KanjiSetView = () => {
                     </p>
 
                     <div className="pt-1 mb-4">
-                        <button
-                            className="btn btn-info btn-lg text-light fw-bold"
+                        <motion.button
+                            whileHover={{scale: 1.1}}
+                            whileTap = {{scale: 0.9}}
+                            className="hajime-button text-white text-light fw-bold"
                             type="submit"
                         >
                             Create
-                        </button>
+                        </motion.button>
                     </div>
                     {error && <p className="text-danger fst-italic">{error}</p>}
                 </div>
@@ -129,7 +132,7 @@ export const KanjiSetView = () => {
     return (
         <>
             <div className="container">
-                <h1 className="text-center my-3">{title}</h1>
+                <h1 className="text-center my-3 fw-bold">{title}</h1>
                 {kanji_list.length === 0 ? (
                     <div>
                         <div
@@ -146,10 +149,18 @@ export const KanjiSetView = () => {
                             </div>
                         </div>
 
-                        <Popup trigger={buttonPopup} setPopUp={setButtonPopup}>
+                        <NewModal
+                            isActive={buttonPopup}
+                            popModal={setButtonPopup}
+                            title="New kanji set"
+                            showHeader={true}
+                            showOverlay={true}
+                            alignModal={'center'}
+                            paddingModal={'10px'}
+                        >
                             <h3 className="mb-3">New kanji</h3>
                             {CreateNewKanjiForm()}
-                        </Popup>
+                        </NewModal>
 
                         <div className="d-flex justify-content-end">
                             <button
@@ -176,22 +187,29 @@ export const KanjiSetView = () => {
                             );
                         })}
                         <div>
-                            <Popup
-                                trigger={buttonPopup}
-                                setPopUp={setButtonPopup}
+                            <NewModal
+                                isActive={buttonPopup}
+                                popModal={setButtonPopup}
+                                title="New kanji set"
+                                showHeader={true}
+                                showOverlay={true}
+                                alignModal={'center'}
+                                paddingModal={'10px'}
                             >
                                 <h3 className="mb-3">New kanji</h3>
                                 {CreateNewKanjiForm()}
-                            </Popup>
+                            </NewModal>
 
                             {/* NEW SET BUTTON */}
                             <div className="d-flex justify-content-end">
-                                <button
-                                    className="btn btn-primary btn-lg rounded-pill btn-info text-white fw-bold px-3"
+                                <motion.button
+                                    whileHover={{scale: 1.1}}
+                                    whileTap = {{scale: 0.9}}
+                                    className="hajime-button text-white fw-bold px-3"
                                     onClick={() => setButtonPopup(true)}
                                 >
                                     + New Kanji
-                                </button>
+                                </motion.button>
                             </div>
                         </div>
                     </div>

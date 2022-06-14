@@ -72,31 +72,31 @@ const HomeView = () => {
                 <div className='achievementsList scroll'>
                     {achievements && achievements.map(ach => {
                         return(
-                                <div className='achievementElement mb-3'>
-                                    <div className='achievementInfo'>
-                                        <h2>{ach.title}</h2>
-                                        <h5>{ach.description}</h5>
-                                    </div>
-                                    <div className='achievementProgress'>
-                                        <div style={{ width: 100, height: 100 }}>
-                                            <CircularProgressbarWithChildren 
-                                                value={ach.progress * 100} 
-                                                styles={buildStyles({
-                                                rotation: 0.25,
-                                                pathTransitionDuration: 0.5,
-                                                pathColor: `rgba(155, 230, 34, ${ach.progress * 100})`,
-                                                textColor: '#f88',
-                                                trailColor: '#d6d6d6',
-                                                backgroundColor: '#3e98c7',
-                                            })}>
-                                                <div style={{ marginTop: -5 }}>
-                                                    <strong>{ach.progress * 100}%</strong>
-                                                </div>
-                                            </CircularProgressbarWithChildren>
-                                        </div>
-                                        {/* {ach.progress === 1 ? <div>Completado</div> : <div>Te falta</div>} */}
-                                    </div>
+                            <div className='achievementElement mb-3'>
+                                <div className='achievementInfo'>
+                                    <h2>{ach.title}</h2>
+                                    <h5>{ach.description}</h5>
                                 </div>
+                                <div className='achievementProgress'>
+                                    <div style={{ width: 100, height: 100 }}>
+                                        <CircularProgressbarWithChildren 
+                                            value={ach.progress * 100} 
+                                            styles={buildStyles({
+                                            rotation: 0.25,
+                                            pathTransitionDuration: 0.5,
+                                            pathColor: `rgba(155, 230, 34, ${ach.progress * 100})`,
+                                            textColor: '#f88',
+                                            trailColor: '#d6d6d6',
+                                            backgroundColor: '#3e98c7',
+                                        })}>
+                                            <div style={{ marginTop: -5 }}>
+                                                <strong>{ach.progress * 100}%</strong>
+                                            </div>
+                                        </CircularProgressbarWithChildren>
+                                    </div>
+                                    {/* {ach.progress === 1 ? <div>Completado</div> : <div>Te falta</div>} */}
+                                </div>
+                            </div>
                         )
                     })}
                 </div>

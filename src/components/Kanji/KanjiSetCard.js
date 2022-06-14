@@ -7,7 +7,7 @@ export const KanjiSetCard = ({title, numberOfKanji}) => {
   const navigate = useNavigate()
 
   return (
-    <div className="col-12 col-sm-6 col-lg-3 p-2">
+    <div className="col-12 col-sm-6 col-lg-3">
         <div 
             className='p-3 rounded raise'
             style={{backgroundColor: "#b98cb3", color:"white", cursor: "pointer"}}
@@ -17,7 +17,7 @@ export const KanjiSetCard = ({title, numberOfKanji}) => {
             }}
         >
             <h3 className='fw-bold'>{title}</h3>
-            <p>{numberOfKanji} kanji</p>
+            <p style={{fontSize: '120%'}}>{numberOfKanji} kanji</p>
         </div>
     </div>
   )
