@@ -29,6 +29,7 @@ const App = () => {
     const [email, setEmail] = useState();
     const [userName, setUserName] = useState();
     const [name, setName] = useState();
+    const [pp, setPp] = useState();
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [render, setRender] = useState(true);
     const [kanjiSets, setKanjiSets] = useState([]);
@@ -45,6 +46,7 @@ const App = () => {
         setEmail(data.email);
         setUserName(data.userName);
         setName(data.name);
+        setPp(data.pp);
         setKanjiSets(data.kanji_sets)
         setAuthToken(data.token);
         setLoggedIn(true);
@@ -54,6 +56,7 @@ const App = () => {
         setLoggedIn(false);
         setEmail(undefined);
         setAuthToken(undefined);
+        setPp(undefined);
         setName(undefined);
         setKanjiSets(undefined);
         setUserName(undefined);
@@ -76,6 +79,7 @@ const App = () => {
                 setAuthToken: setToken,
                 email,
                 name,
+                pp,
                 userName,
                 kanjiSets,
                 isLoggedIn,
