@@ -19,6 +19,7 @@ const loginSchema = yup.object({
 
 const registerSchema = yup.object({
     userName: yup.string().required("Username is required"),
+    pp: yup.string(),
     name: yup.string().required("Name is required"),
     email: yup
         .string()
