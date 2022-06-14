@@ -82,7 +82,7 @@ export const KanjiView = () => {
                 <h1 className="my-5 fw-bold">Your Kanji sets</h1>
 
                 {/* KANJI SETS GRID */}
-                <div className="row">
+                <div className="row cardsKanjiContainer">
                     {kanjiSets.map((set, key) => {
                         return (
                             <KanjiSetCard

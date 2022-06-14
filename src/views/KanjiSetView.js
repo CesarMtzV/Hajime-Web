@@ -132,7 +132,7 @@ export const KanjiSetView = () => {
     return (
         <>
             <div className="container">
-                <h1 className="text-center my-3 fw-bold">{title}</h1>
+                <h1 className="text-center my-3 fw-bold">Set: {title}</h1>
                 {kanji_list.length === 0 ? (
                     <div>
                         <div
@@ -163,12 +163,14 @@ export const KanjiSetView = () => {
                         </NewModal>
 
                         <div className="d-flex justify-content-end">
-                            <button
-                                className="btn btn-info btn-lg rounded-pill btn-info text-white fw-bold px-3"
+                            <motion.button
+                                whileHover={{scale: 1.1}}
+                                whileTap = {{scale: 0.9}}
+                                className="hajime-button text-white fw-bold px-3"
                                 onClick={() => setButtonPopup(true)}
                             >
                                 + New kanji
-                            </button>
+                            </motion.button>
                         </div>
                     </div>
                 ) : (
