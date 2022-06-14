@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import Modal from "../components/NewModal/NewModal";
+import { motion } from "framer-motion";
 
 const HomeView = () => {
     const [randomKanji, setRandomKanji] = useState();
+    const [modal1, showModal1] = useState(false);
 
     const generateKanji =  async () => {
         const randomGrade = Math.floor(Math.random() * 5) + 1;
@@ -36,6 +39,17 @@ const HomeView = () => {
 
     return (
         <>
+            <Modal
+                isActive={modal1}
+                popModal={showModal1}
+                title="Your Achievements"
+                showHeader={true}
+                showOverlay={true}
+                alignModal={'start'}
+                paddingModal={'30px'}
+            >
+                <h3>Your achievements</h3>
+            </Modal>
             <div className="main-content">
                 <div className="container-fluid px-0 px-sm-3">
                     <div className="row pt-3 px-5" style={{ height: "80vh" }}>
@@ -58,17 +72,17 @@ const HomeView = () => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <h4>Kun reading:</h4>
-                                            {randomKanji && randomKanji.kun_readings.map(kun => {
+                                            {randomKanji && randomKanji.kun_readings.map((key, kun) => {
                                                 return(
-                                                    <p>{kun}</p>
+                                                    <p key={key}>{key}</p>
                                                 );
                                             })}
                                         </div>
                                         <div className="col-md-6">
                                             <h4>On reading:</h4>
-                                            {randomKanji && randomKanji.on_readings.map(on => {
+                                            {randomKanji && randomKanji.on_readings.map((key, on) => {
                                                 return(
-                                                    <p>{on}</p>
+                                                    <p key={key}>{key}</p>
                                                 );
                                             })}
                                         </div>
@@ -77,24 +91,19 @@ const HomeView = () => {
                                 <div className="meaning-div">
                                     <h3>Meaning:</h3>
                                     <ul>
-                                        {randomKanji && randomKanji.meanings.map(meaning => {
+                                        {randomKanji && randomKanji.meanings.map((key, meaning) => {
                                             return(
-                                                <p>{meaning}</p>
+                                                <p key={key}>{key}</p>
                                             );
                                         })}
                                     </ul>
                                 </div>
-                                <button
-                                    type="button"
-                                    className="btn"
-                                    style={{
-                                        width: "100px",
-                                        backgroundColor: "#a871a0",
-                                    }}
-                                    onClick={handleGenerate}
-                                >
-                                    Generate
-                                </button>
+                                <motion.button 
+                                        whileHover={{scale: 1.1}}
+                                        whileTap = {{scale: 0.9}}
+                                        className="hajime-button text-white" onClick={handleGenerate}>
+                                        Generate
+                                </motion.button>
                             </div>
                         </div>
                         <div className="col-md-8">
@@ -175,67 +184,45 @@ const HomeView = () => {
                                                 <p>ヘルプ</p>
                                             </div>
                                         </div>
-                                        <button
-                                            type="button"
-                                            className="btn ms-auto"
-                                            style={{
-                                                width: "100px",
-                                                backgroundColor: "#a871a0",
-                                            }}
-                                        >
+                                        <motion.button 
+                                        whileHover={{scale: 1.1}}
+                                        whileTap = {{scale: 0.9}}
+                                        className="hajime-button ms-auto text-white" onClick={() => showModal1(!modal1)}>
                                             More
-                                        </button>
+                                        </motion.button>
                                     </div>
                                 </div>
                             </div>
                             <div className="row pt-4">
                                 <div className="col-md-4">
-                                    <div
-                                        className="card d-flex flex-column align-items-center text-white p-2"
-                                        style={{ backgroundColor: "#b98cb3" }}
+                                    <motion.button 
+                                        whileHover={{scale: 1.1}}
+                                        whileTap = {{scale: 0.9}}
+                                        className="btnBigHome"
                                     >
-                                        <h2
-                                            style={{
-                                                color: "#000",
-                                                fontSize: "10rem",
-                                            }}
-                                        >
-                                            さ
-                                        </h2>
+                                        <h1>さ</h1>
                                         <h2>Hiragana</h2>
-                                    </div>
+                                    </motion.button>
                                 </div>
                                 <div className="col-md-4">
-                                    <div
-                                        className="card d-flex flex-column align-items-center text-white p-2"
-                                        style={{ backgroundColor: "#b98cb3" }}
+                                    <motion.button 
+                                        whileHover={{scale: 1.1}}
+                                        whileTap = {{scale: 0.9}}
+                                        className="btnBigHome"
                                     >
-                                        <h2
-                                            style={{
-                                                color: "#000",
-                                                fontSize: "10rem",
-                                            }}
-                                        >
-                                            オ
-                                        </h2>
+                                        <h1>オ</h1>
                                         <h2>Katakana</h2>
-                                    </div>
+                                    </motion.button>
                                 </div>
                                 <div className="col-md-4">
-                                    <div
-                                        className="card d-flex flex-column align-items-center text-white p-2"
-                                        style={{ backgroundColor: "#b98cb3" }}
+                                    <motion.button 
+                                        whileHover={{scale: 1.1}}
+                                        whileTap = {{scale: 0.9}}
+                                        className="btnBigHome"
                                     >
-                                        <h2
-                                            style={{
-                                                color: "#000",
-                                                fontSize: "10rem",
-                                            }}
-                                        >
-                                            件
-                                        </h2>
+                                        <h1>件</h1>
                                         <h2>Kanji</h2>
-                                    </div>
+                                    </motion.button>
                                 </div>
                             </div>
                         </div>

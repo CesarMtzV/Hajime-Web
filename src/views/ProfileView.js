@@ -2,16 +2,13 @@ import { faShuffle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useAuth } from "../components/auth/auth";
-import NavBar from "../components/NavBar/NavBar";
-import { loggedIn_routes } from "../static/navbarRoutes";
+
 
 export const ProfileView = () => {
     const { destroySession, email, name, userName } = useAuth();
 
     return (
         <>
-            <NavBar navbarRoutes={loggedIn_routes} />
-
             <div className="container">
                 <div className="row">
                     <div className="col-12 col-lg-4 text-center p-5">

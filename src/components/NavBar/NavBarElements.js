@@ -18,6 +18,7 @@ export const NavBtn = styled.nav`
     display: flex;
     align-items: center;
     margin-right: 24px;
+    font-weight: 600;
     @media screen and (max-width: 320px) {
         flex-direction: column;
         justify-content: center;

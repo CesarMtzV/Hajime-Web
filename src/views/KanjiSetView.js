@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../components/auth/auth";
-import NavBar from "../components/NavBar/NavBar";
-import { loggedIn_routes } from "../static/navbarRoutes";
 import { Popup } from "../components/popup/Popup";
 import { kanjiCharacterSchema } from "../static/schema";
 import axios from "axios";
@@ -130,7 +128,6 @@ export const KanjiSetView = () => {
 
     return (
         <>
-            <NavBar navbarRoutes={loggedIn_routes} />
             <div className="container">
                 <h1 className="text-center my-3">{title}</h1>
                 {kanji_list.length === 0 ? (
