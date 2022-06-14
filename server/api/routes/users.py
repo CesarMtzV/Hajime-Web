@@ -17,7 +17,41 @@ def signup():
             'userName': request.json['userName'],
             'email': request.json['email'],
             'password': hashpw,
-            'kanji_sets': []
+            'kanji_sets': [],
+            'achievements':{
+                'newKatakanaRecord': {
+                    'title': 'New Katakana Record',
+                    'progress': 0,
+                    'description': 'You broke your record studying Katakana'
+                },
+                'newHiraganaRecord': {
+                    'title': 'New Hiragana Record',
+                    'progress': 0,
+                    'description': 'You broke your record studying Hiragana'
+                },
+                'katakanaPractice': {
+                    'title': 'New Katakana Record',
+                    'progress': 0,
+                    'description': 'You practiced Katakana for the first time'
+                },
+                'hiraganaPractice': {
+                    'title': 'New Hiragana Record',
+                    'progress': 0,
+                    'description': 'You practiced Hiragana for the first time'
+                },
+                'randomKanji': {
+                    'title': 'Random',
+                    'progress': 0,
+                    'description': 'You generated your first random Kanji'
+                },
+                'kanjiDeck': {
+                    'title': 'Kanji Deck',
+                    'progress': 0,
+                    'description': 'You created your first Kanji deck'
+                }
+            },
+            'katakanaHighScore': 0,
+            'hiraganaHighScore': 0
         })
         return jsonify({'message': 'Account created succesfully!'})
     return jsonify({'message': 'Username already exists!'})
