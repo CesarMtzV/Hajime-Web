@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Modal from "../components/NewModal/NewModal";
+import NewModal from '../components/NewModal/NewModal';
 import { motion } from "framer-motion";
+import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const HomeView = () => {
     const [randomKanji, setRandomKanji] = useState();
@@ -58,7 +60,7 @@ const HomeView = () => {
 
     return (
         <>
-            <Modal
+            <NewModal
                 isActive={modal1}
                 popModal={showModal1}
                 title="Your Achievements"
@@ -67,61 +69,82 @@ const HomeView = () => {
                 alignModal={'start'}
                 paddingModal={'30px'}
             >
-                {achievements && achievements.map(ach => {
-                    return(
-                        <div>
-                            <p>{ach.title}</p>
-                            <p>{ach.description}</p>
-                            {ach.progress == 1 ? <div>Completado</div> : <div>Te falta</div>}
-                            <br></br>
-                        </div>
-                    )
-                })}
-            </Modal>
+                <div className='achievementsList scroll'>
+                    {achievements && achievements.map(ach => {
+                        return(
+                                <div className='achievementElement mb-3'>
+                                    <div className='achievementInfo'>
+                                        <h2>{ach.title}</h2>
+                                        <h5>{ach.description}</h5>
+                                    </div>
+                                    <div className='achievementProgress'>
+                                        <div style={{ width: 100, height: 100 }}>
+                                            <CircularProgressbarWithChildren 
+                                                value={ach.progress * 100} 
+                                                styles={buildStyles({
+                                                rotation: 0.25,
+                                                pathTransitionDuration: 0.5,
+                                                pathColor: `rgba(155, 230, 34, ${ach.progress * 100})`,
+                                                textColor: '#f88',
+                                                trailColor: '#d6d6d6',
+                                                backgroundColor: '#3e98c7',
+                                            })}>
+                                                <div style={{ marginTop: -5 }}>
+                                                    <strong>{ach.progress * 100}%</strong>
+                                                </div>
+                                            </CircularProgressbarWithChildren>
+                                        </div>
+                                        {/* {ach.progress === 1 ? <div>Completado</div> : <div>Te falta</div>} */}
+                                    </div>
+                                </div>
+                        )
+                    })}
+                </div>
+            </NewModal>
             <div className="main-content">
                 <div className="container-fluid px-0 px-sm-3">
                     <div className="row pt-3 px-5" style={{ height: "80vh" }}>
-                        <div className="col-md-4">
+                        <div className="col-md-4 h-100">
                             <div
-                                className="card d-flex flex-column align-items-center text-white h-100 p-3"
+                                className="card d-flex flex-column align-items-center text-white h-100 p-3 scrollHomeCard"
                                 style={{ backgroundColor: "#b98cb3" }}
                             >
-                                <h2>Kanji Generator</h2>
+                                <h2 style={{fontWeight: 600}}>Kanji Generator</h2>
                                 <div className="kanji-info py-4">
                                     <div className="row">
                                         <div className="col-md-6">
                                             <h1>{randomKanji && randomKanji.kanji}</h1>
                                         </div>
                                         <div className="col-md-6">
-                                            <h4>Number of strokes:</h4>
+                                            <h4 style={{fontWeight: 600}}>Number of strokes:</h4>
                                             <p>{randomKanji && randomKanji.stroke_count}</p>
                                         </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
-                                            <h4>Kun reading:</h4>
+                                            <h4 style={{fontWeight: 600}}>Kun reading:</h4>
                                             {randomKanji && randomKanji.kun_readings.map((key, kun) => {
                                                 return(
-                                                    <p key={key}>{key}</p>
+                                                    <p className='m-0' key={key}>{key}</p>
                                                 );
                                             })}
                                         </div>
                                         <div className="col-md-6">
-                                            <h4>On reading:</h4>
+                                            <h4 style={{fontWeight: 600}}>On reading:</h4>
                                             {randomKanji && randomKanji.on_readings.map((key, on) => {
                                                 return(
-                                                    <p key={key}>{key}</p>
+                                                    <p className='m-0' key={key}>{key}</p>
                                                 );
                                             })}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="meaning-div">
-                                    <h3>Meaning:</h3>
+                                    <h3 style={{fontWeight: 600}}>Meaning:</h3>
                                     <ul>
                                         {randomKanji && randomKanji.meanings.map((key, meaning) => {
                                             return(
-                                                <p key={key}>{key}</p>
+                                                <p className='m-0' style={{fontSize: '150%'}} key={key}>{key}</p>
                                             );
                                         })}
                                     </ul>
@@ -141,81 +164,41 @@ const HomeView = () => {
                                         className="card text-white p-3"
                                         style={{ backgroundColor: "#b98cb3" }}
                                     >
-                                        <h2>Achievements</h2>
+                                        <h2 style={{fontWeight: 600}}>Achievements</h2>
                                         <div className="row achievements-card">
-                                            <div className="col-md-3 d-flex flex-column align-items-center">
-                                                <div className="progress yellow">
-                                                    {" "}
-                                                    <span className="progress-left">
-                                                        {" "}
-                                                        <span className="progress-bar"></span>{" "}
-                                                    </span>{" "}
-                                                    <span className="progress-right">
-                                                        {" "}
-                                                        <span className="progress-bar"></span>{" "}
-                                                    </span>
-                                                    <div className="progress-value">
-                                                        37.5%
-                                                    </div>
-                                                </div>
-                                                <p>Random</p>
-                                            </div>
-                                            <div className="col-md-3  d-flex flex-column align-items-center">
-                                                <div className="progress blue">
-                                                    {" "}
-                                                    <span className="progress-left">
-                                                        {" "}
-                                                        <span className="progress-bar"></span>{" "}
-                                                    </span>{" "}
-                                                    <span className="progress-right">
-                                                        {" "}
-                                                        <span className="progress-bar"></span>{" "}
-                                                    </span>
-                                                    <div className="progress-value">
-                                                        90%
-                                                    </div>
-                                                </div>
-                                                <p>New Record!</p>
-                                            </div>
-                                            <div className="col-md-3  d-flex flex-column align-items-center">
-                                                <div className="progress green">
-                                                    {" "}
-                                                    <span className="progress-left">
-                                                        {" "}
-                                                        <span className="progress-bar"></span>{" "}
-                                                    </span>{" "}
-                                                    <span className="progress-right">
-                                                        {" "}
-                                                        <span className="progress-bar"></span>{" "}
-                                                    </span>
-                                                    <div className="progress-value">
-                                                        50%
-                                                    </div>
-                                                </div>
-                                                <p>Artist</p>
-                                            </div>
-                                            <div className="col-md-3  d-flex flex-column align-items-center">
-                                                <div className="progress green">
-                                                    {" "}
-                                                    <span className="progress-left">
-                                                        {" "}
-                                                        <span className="progress-bar"></span>{" "}
-                                                    </span>{" "}
-                                                    <span className="progress-right">
-                                                        {" "}
-                                                        <span className="progress-bar"></span>{" "}
-                                                    </span>
-                                                    <div className="progress-value">
-                                                        50%
-                                                    </div>
-                                                </div>
-                                                <p>ヘルプ</p>
-                                            </div>
+                                            {achievements && achievements.map(ach => {
+                                                if(ach.progress !== 1) {
+                                                    return (
+                                                        <div className="col-md-3 d-flex flex-column align-items-center">
+                                                            <div className='achievements-card-element'>
+                                                                <CircularProgressbarWithChildren 
+                                                                    value={ach.progress * 100} 
+                                                                    styles={buildStyles({
+                                                                    rotation: 0.25,
+                                                                    pathTransitionDuration: 0.5,
+                                                                    pathColor: `rgba(155, 230, 34, ${ach.progress * 100})`,
+                                                                    textColor: '#f88',
+                                                                    trailColor: '#d6d6d6',
+                                                                    backgroundColor: '#3e98c7',
+                                                                })}>
+                                                                    <div style={{ fontSize: 50, marginTop: -5 }}>
+                                                                        <strong>{ach.progress * 100}%</strong>
+                                                                    </div>
+                                                                </CircularProgressbarWithChildren>
+                                                                <p>{ach.title}</p>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                } else {
+                                                    return <></>;
+                                                }
+                                            })}
                                         </div>
                                         <motion.button 
                                         whileHover={{scale: 1.1}}
                                         whileTap = {{scale: 0.9}}
-                                        className="hajime-button ms-auto text-white" onClick={() => showModal1(!modal1)}>
+                                        className="hajime-button ms-auto text-white mt-2" onClick={() => showModal1(!modal1)}
+                                        >
                                             More
                                         </motion.button>
                                     </div>
