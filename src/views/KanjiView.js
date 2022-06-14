@@ -83,7 +83,7 @@ export const KanjiView = () => {
     <>
       <div className="main-content">
         <div className="container">
-          <h1 className="my-5">Your Kanji sets</h1>
+          <h1 className="py-5">Your Kanji sets</h1>
 
           {/* KANJI SETS GRID */}
           <div className="row">
