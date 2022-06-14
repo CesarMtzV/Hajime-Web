@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Blueprint, request, jsonify
 from jwt import decode
 from jwt_functions import validate_token
@@ -14,6 +15,23 @@ def verify_token_middleware():
 
     token = request.headers['Authorization'].split(" ")[1]
     validate_token(token, display=False)
+
+@routes_achievements.route('/achievements', methods=['GET'])
+def get_achievements():
+    from api import db
+    user = decode(token, key=getenv('SECRET'), algorithms=['HS256'])
+
+    foundUser = db.users.find_one({
+        'userName': request.json['userName']
+    })
+
+    if not foundUser:
+        return jsonify({
+            "status_code": 404,
+            "body": "User not found"
+        }), 404
+    
+    print(foundUser.achievements)
 
 @routes_achievements.route('/hiraganaHighScore', methods=['GET', 'POST'])
 def save_hiragana_score():
