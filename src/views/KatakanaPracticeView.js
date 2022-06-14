@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const kata  = { 
     'ア' : 'A',
@@ -51,7 +52,7 @@ const kata  = {
     'ン' : 'n',
 };
 
-function shuffleArray(arr) {
+const shuffleArray = (arr) => {
     return arr.sort((a, b) => 0.5 - Math.random());
 }
 
@@ -73,6 +74,23 @@ const KatakanaPracticeView = () => {
             ])});
     const [practiceScore, setPracticeScore] = useState(0);
     const [quizScore, setQuizScore] = useState(0);
+
+    useEffect(() => {
+        var token = localStorage.getItem("token");
+
+        const score = axios
+            .get("/api/achievements/katakanaHighScore", { headers: { Authorization: `Bearer ${token}` } })
+            .then((result) => {
+                return(result.json());
+            })
+            .then(res => {
+                console.log(res.items);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+        console.log('asdfdsaf', score);
+    })
 
     const handleAnswerOptionClick = (isCorrect) => {
         var aux = Math.floor(Math.random() * keys.length);

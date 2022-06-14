@@ -84,7 +84,6 @@ const App = () => {
             }}
         >
             <Router>
-                {console.log(isLoggedIn)}
                 {isLoggedIn ? <NavBar navbarRoutes={loggedIn_routes} /> : <></>}
                 <Routes>
                     <Route path="/" element={<WelcomeView />} />
