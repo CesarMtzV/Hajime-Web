@@ -36,6 +36,7 @@ def save_katakana_score():
     user = decode(token, key=getenv('SECRET'), algorithms=['HS256'])
     
     if request.method == 'POST':
+        print(request.json)
         db.users.update_one(
             {'userName': user['userName']},
             {'$set': {'katakanaHighScore': request.json['katakanaHighScore']}}

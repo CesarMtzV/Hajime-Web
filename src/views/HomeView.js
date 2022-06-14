@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import NavBar from "../components/NavBar/NavBar";
-import { loggedIn_routes } from "../static/navbarRoutes";
 
 const HomeView = () => {
     const [randomKanji, setRandomKanji] = useState();
