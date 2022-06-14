@@ -4,7 +4,25 @@ import { motion } from "framer-motion";
 
 const HomeView = () => {
     const [randomKanji, setRandomKanji] = useState();
+    const [achievements, setAchievements] = useState();
     const [modal1, showModal1] = useState(false);
+
+    const getAchievements = async () => {
+        var token = localStorage.getItem("token");
+        
+        const data = await fetch("/api/achievements/getAchievements", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        let achievements;
+        if (data) {
+            achievements = await data.json();
+        }
+
+        setAchievements(achievements.achievements);
+    }
 
     const generateKanji =  async () => {
         const randomGrade = Math.floor(Math.random() * 5) + 1;
@@ -28,8 +46,9 @@ const HomeView = () => {
     }
 
     useEffect(() => {
+        getAchievements();
         generateKanji();
-    }, [setRandomKanji]);
+    }, [setRandomKanji, setAchievements]);
     
 
     const handleGenerate = async (e) => {
@@ -48,7 +67,16 @@ const HomeView = () => {
                 alignModal={'start'}
                 paddingModal={'30px'}
             >
-                <h3>Your achievements</h3>
+                {achievements && achievements.map(ach => {
+                    return(
+                        <div>
+                            <p>{ach.title}</p>
+                            <p>{ach.description}</p>
+                            {ach.progress == 1 ? <div>Completado</div> : <div>Te falta</div>}
+                            <br></br>
+                        </div>
+                    )
+                })}
             </Modal>
             <div className="main-content">
                 <div className="container-fluid px-0 px-sm-3">

@@ -18,38 +18,38 @@ def signup():
             'email': request.json['email'],
             'password': hashpw,
             'kanji_sets': [],
-            'achievements':{
-                'newKatakanaRecord': {
+            'achievements': [
+                {
                     'title': 'New Katakana Record',
                     'progress': 0,
                     'description': 'You broke your record studying Katakana'
                 },
-                'newHiraganaRecord': {
+                {
                     'title': 'New Hiragana Record',
                     'progress': 0,
                     'description': 'You broke your record studying Hiragana'
                 },
-                'katakanaPractice': {
-                    'title': 'New Katakana Record',
+                {
+                    'title': 'First Time Katakana',
                     'progress': 0,
                     'description': 'You practiced Katakana for the first time'
                 },
-                'hiraganaPractice': {
-                    'title': 'New Hiragana Record',
+                {
+                    'title': 'First Time Hiragana',
                     'progress': 0,
                     'description': 'You practiced Hiragana for the first time'
                 },
-                'randomKanji': {
+                {
                     'title': 'Random',
                     'progress': 0,
                     'description': 'You generated your first random Kanji'
                 },
-                'kanjiDeck': {
+                {
                     'title': 'Kanji Deck',
                     'progress': 0,
                     'description': 'You created your first Kanji deck'
                 }
-            },
+            ],
             'katakanaHighScore': 0,
             'hiraganaHighScore': 0
         })
