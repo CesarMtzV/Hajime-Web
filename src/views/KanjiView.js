@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { KanjiSetCard } from "../components/Kanji/KanjiSetCard";
-import NavBar from "../components/NavBar/NavBar";
 import { useAuth } from "../components/auth/auth";
 import { Popup } from "../components/popup/Popup";
 import { useForm } from "react-hook-form";
