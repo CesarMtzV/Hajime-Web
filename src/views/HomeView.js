@@ -3,6 +3,7 @@ import NewModal from '../components/NewModal/NewModal';
 import { motion } from "framer-motion";
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import axios from "axios";
 
 const HomeView = () => {
     const [randomKanji, setRandomKanji] = useState();
@@ -26,6 +27,16 @@ const HomeView = () => {
         setAchievements(achievements.achievements);
     }
 
+    const updateAchievements = async (updatedAchievements) => {
+        var token = localStorage.getItem("token");
+
+        await axios.post("/api/achievements/setAchievements", {'updatedAchievements': updatedAchievements}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    }
+
     const generateKanji =  async () => {
         const randomGrade = Math.floor(Math.random() * 5) + 1;
         const grade = await fetch(`https://kanjiapi.dev/v1/kanji/grade-${randomGrade}`);
@@ -43,14 +54,20 @@ const HomeView = () => {
             kanjiJson = await kanji.json();
         }
 
-        if (kanjiJson)
-        setRandomKanji(kanjiJson);
+        if (kanjiJson) {
+            setRandomKanji(kanjiJson);
+            if (achievements[4].progress !== 1) {
+                const aux = achievements;
+                aux[4].progress = 1;
+                setAchievements(aux);
+                updateAchievements(aux);
+            }
+        }
     }
 
     useEffect(() => {
         getAchievements();
-        generateKanji();
-    }, [setRandomKanji, setAchievements]);
+    }, [setAchievements]);
     
 
     const handleGenerate = async (e) => {

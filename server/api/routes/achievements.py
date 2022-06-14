@@ -32,6 +32,19 @@ def get_achievements():
     
     return jsonify({'achievements': foundUser['achievements']})
 
+@routes_achievements.route('/setAchievements', methods=['POST'])
+def set_achievement():
+    from api import db
+
+    user = decode(token, key=getenv('SECRET'), algorithms=['HS256'])
+
+    db.users.update_one(
+        {'userName': user['userName']},
+        {'$set': {'achievements': request.json['updatedAchievements']}}
+    )
+
+    return jsonify({'message': 'New achievement set succesfully!'})
+
 @routes_achievements.route('/hiraganaHighScore', methods=['GET', 'POST'])
 def save_hiragana_score():
     from api import db
