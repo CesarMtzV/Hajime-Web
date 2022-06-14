@@ -48,6 +48,21 @@ def signup():
                     'title': 'Kanji Deck',
                     'progress': 0,
                     'description': 'You created your first Kanji deck'
+                },
+                {
+                    'title': 'Deck Master',
+                    'progress': 0,
+                    'description': 'You created 10 Kanji sets'
+                },
+                {
+                    'title': 'Dedicated Student',
+                    'progress': 0,
+                    'description': 'You logged in more than 10 times'
+                },
+                {
+                    'title': 'Quiz Master',
+                    'progress': 0,
+                    'description': 'Yo got more than 30 in a quiz'
                 }
             ],
             'katakanaHighScore': 0,

@@ -99,6 +99,33 @@ const HiraganaPracticeView = () => {
         fetchData();
     }, [setQuizScore])
 
+    const getAchievements = async () => {
+        var token = localStorage.getItem("token");
+        
+        const data = await fetch("/api/achievements/getAchievements", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        let achievements;
+        if (data) {
+            achievements = await data.json();
+        }
+
+        return(achievements.achievements);
+    }
+
+    const updateAchievements = async (updatedAchievements) => {
+        var token = localStorage.getItem("token");
+
+        await axios.post("/api/achievements/setAchievements", {'updatedAchievements': updatedAchievements}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    }
+
     const updateHighScore = async (quizScore) => {
         var token = localStorage.getItem("token");
 
@@ -109,7 +136,7 @@ const HiraganaPracticeView = () => {
         });
     }
 
-    const handleAnswerOptionClick = (isCorrect) => {
+    const handleAnswerOptionClick = async (isCorrect) => {
         var aux = Math.floor(Math.random() * keys.length);
         /* const nextCharacter = keys[aux];
         const nextValue = values[aux]; */
@@ -128,6 +155,22 @@ const HiraganaPracticeView = () => {
                 setQuizScore(quizScore + 1);
 
                 if (quizScore + 1 > highScore) {
+                    const ach = await getAchievements();
+
+                    if (highScore !== 0) {
+                        if (ach[1].progress === 0) {
+                            ach[1].progress = 1;
+                            await updateAchievements(ach);
+                        }
+                    }
+
+                    if (ach[8].progress < 1) {
+                        if (ach[8].progress < (quizScore + 1)/30) {
+                            ach[8].progress = (quizScore + 1)/30;
+                            await updateAchievements(ach);
+                        }
+                    }
+
                     setHighScore(quizScore + 1);
                     updateHighScore(quizScore + 1);
                 }
@@ -149,10 +192,16 @@ const HiraganaPracticeView = () => {
         setCurrentCharacter(nextCharacter);
     }
 
-    const handleQuizMode = () => {
+    const handleQuizMode = async () => {
 
         if(!showQuiz) {
             setQuizMode(true);
+            const ach = await getAchievements();
+
+            if (ach[3].progress === 0) {
+                ach[3].progress = 1;
+                updateAchievements(ach);
+            }
             setQuizScore(0);
             console.log(showQuiz);
         } else {
