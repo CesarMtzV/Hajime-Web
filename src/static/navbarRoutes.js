@@ -31,7 +31,7 @@ const loggedIn_routes = [
         name: "Katakana",
     },
     {
-        route: "/",
+        route: "/kanji",
         name: "Kanji",
     },
     {
