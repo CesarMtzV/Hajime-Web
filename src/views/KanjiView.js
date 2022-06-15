@@ -67,6 +67,7 @@ export const KanjiView = () => {
 
                 if (ach[6].progress < 1) {
                     ach[6].progress += 0.1;
+                    ach[6].progress = ach[6].progress.toFixed(2);
                     await updateAchievements(ach);
                 }
 
