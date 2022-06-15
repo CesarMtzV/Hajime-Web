@@ -222,7 +222,7 @@ const HiraganaPracticeView = () => {
                 transition={{ duration: .5 }}>
                     <div><Toaster/></div>
                     <div className="row">
-                        <div className="card border-light align-items-center mt-3 pb-3 h-100">
+                        <div className="card align-items-center mt-3 pb-3 h-100 bg-transparent border-0">
                             <div className="d-flex align-items-center w-100 pt-2">
                                 <h2 className="card-title px-4 fw-bold">Quiz Mode</h2>
                                 <div className="ms-auto d-flex">
@@ -259,10 +259,10 @@ const HiraganaPracticeView = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: .5 }}>
                     <div><Toaster/></div>
-                    <div className="container-fluid px-0 px-sm-3">
+                    <div className="container-fluid px-0 px-sm-3 ">
                         <div className="row" style={{height: "45rem"}}>
-                            <div className="col-md px-5 h-100">
-                                <div className="card border-light align-items-center mt-3 pb-3 h-100">
+                            <div className="col-md px-5 h-100 ">
+                                <div className="card align-items-center mt-3 pb-3 h-100 bg-transparent border-0">
                                     <div className="d-flex align-items-center w-100 pt-2">
                                         <h2 className="card-title px-4 fw-bold">Practice Mode</h2>
                                         <h2 className="ms-auto px-4 fw-bold">Score:</h2>
@@ -289,7 +289,7 @@ const HiraganaPracticeView = () => {
                                 </div>
                             </div>
                             <div className="col-md-5 h-100 mt-3">
-                                <div className="hiraganaContainer mx-4 scroll">
+                                <div className="hiraganaContainer mx-4 scrollSilabarios">
                                     {Object.keys(hira).map((key, index) => {
                                         return (
                                             <motion.div 

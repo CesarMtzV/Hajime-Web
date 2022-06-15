@@ -131,64 +131,31 @@ export const KanjiSetView = () => {
 
     return (
         <>
-            <div className="container">
-                <h1 className="text-center my-3 fw-bold">Set: {title}</h1>
-                {kanji_list.length === 0 ? (
-                    <div>
-                        <div
-                            className="card w-50 text-center m-auto"
-                            style={{ backgroundColor: "#F7F7F7" }}
-                        >
-                            <div className="card-body">
-                                <h1 className="card-title">
-                                    You haven't added any Kanji to this set
-                                </h1>
-                                <p className="card-text">
-                                    Add some Kanji to be displayed
-                                </p>
-                            </div>
-                        </div>
-
-                        <NewModal
-                            isActive={buttonPopup}
-                            popModal={setButtonPopup}
-                            title="New kanji set"
-                            showHeader={true}
-                            showOverlay={true}
-                            alignModal={'center'}
-                            paddingModal={'10px'}
-                        >
-                            <h3 className="mb-3">New kanji</h3>
-                            {CreateNewKanjiForm()}
-                        </NewModal>
-
-                        <div className="d-flex justify-content-end">
-                            <motion.button
-                                whileHover={{scale: 1.1}}
-                                whileTap = {{scale: 0.9}}
-                                className="hajime-button text-white fw-bold px-3"
-                                onClick={() => setButtonPopup(true)}
-                            >
-                                + New kanji
-                            </motion.button>
-                        </div>
-                    </div>
-                ) : (
-                    <div>
-                        {kanji_list.map((item, key) => {
-                            return (
-                                <div key={key} className="col">
-                                    <KanjiCard
-                                        kanji={item.kanji}
-                                        spelling={item.spelling}
-                                        definitions={item.definitions}
-                                        strokes={item.strokes}
-                                        examples={item.examples}
-                                    />
-                                </div>
-                            );
-                        })}
+            <motion.div
+                className="main-content"
+                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: .5 }}
+            >
+                <div className="container">
+                    <h1 className="text-center py-3 fw-bold">Set: {title}</h1>
+                    {kanji_list.length === 0 ? (
                         <div>
+                            <div
+                                className="card w-50 text-center m-auto"
+                                style={{ backgroundColor: "#F7F7F7" }}
+                            >
+                                <div className="card-body">
+                                    <h1 className="card-title">
+                                        You haven't added any Kanji to this set
+                                    </h1>
+                                    <p className="card-text">
+                                        Add some Kanji to be displayed
+                                    </p>
+                                </div>
+                            </div>
+
                             <NewModal
                                 isActive={buttonPopup}
                                 popModal={setButtonPopup}
@@ -202,7 +169,6 @@ export const KanjiSetView = () => {
                                 {CreateNewKanjiForm()}
                             </NewModal>
 
-                            {/* NEW SET BUTTON */}
                             <div className="d-flex justify-content-end">
                                 <motion.button
                                     whileHover={{scale: 1.1}}
@@ -210,13 +176,54 @@ export const KanjiSetView = () => {
                                     className="hajime-button text-white fw-bold px-3"
                                     onClick={() => setButtonPopup(true)}
                                 >
-                                    + New Kanji
+                                    + New kanji
                                 </motion.button>
                             </div>
                         </div>
-                    </div>
-                )}
-            </div>
+                    ) : (
+                        <div>
+                            {kanji_list.map((item, key) => {
+                                return (
+                                    <div key={key} className="col">
+                                        <KanjiCard
+                                            kanji={item.kanji}
+                                            spelling={item.spelling}
+                                            definitions={item.definitions}
+                                            strokes={item.strokes}
+                                            examples={item.examples}
+                                        />
+                                    </div>
+                                );
+                            })}
+                            <div>
+                                <NewModal
+                                    isActive={buttonPopup}
+                                    popModal={setButtonPopup}
+                                    title="New kanji set"
+                                    showHeader={true}
+                                    showOverlay={true}
+                                    alignModal={'center'}
+                                    paddingModal={'10px'}
+                                >
+                                    <h3 className="mb-3">New kanji</h3>
+                                    {CreateNewKanjiForm()}
+                                </NewModal>
+
+                                <div className="d-flex justify-content-end">
+                                    <motion.button
+                                        whileHover={{scale: 1.1}}
+                                        whileTap = {{scale: 0.9}}
+                                        className="hajime-button text-white fw-bold px-3"
+                                        onClick={() => setButtonPopup(true)}
+                                    >
+                                        + New Kanji
+                                    </motion.button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </motion.div>
         </>
     );
 };
