@@ -129,12 +129,19 @@ const HomeView = () => {
                                         </div>
                                         {/* {ach.progress === 1 ? <div>Completado</div> : <div>Te falta</div>} */}
                                     </div>
+                                    {/* {ach.progress === 1 ? <div>Completado</div> : <div>Te falta</div>} */}
                                 </div>
                             );
                         })}
                 </div>
             </NewModal>
-            <div className="main-content">
+            <motion.div 
+                className="main-content"
+                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: .5 }}
+            >
                 <div className="container-fluid px-0 px-sm-3">
                     <div
                         className="row pt-3 px-5 pb-5"
@@ -311,7 +318,7 @@ const HomeView = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </>
     );
 };

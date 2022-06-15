@@ -12192,6 +12192,17 @@ fieldset:disabled .btn {
   border-radius: 50%;
 }
 
+.kanji-card {
+  text-decoration: none;
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  border-radius: 25px;
+  box-shadow: 0px 5px 0px 0px rgba(0, 0, 0, 0.1);
+  border: solid 2px rgba(0, 0, 0, 0.1);
+  padding: 20px 0px;
+}
+
 .logoNavBar {
   border-radius: 50%;
   max-width: 80px;
