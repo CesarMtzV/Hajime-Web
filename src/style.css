@@ -12191,3 +12191,8 @@ fieldset:disabled .btn {
   width: 100%;
   border-radius: 50%;
 }
+
+.logoNavBar {
+  border-radius: 50%;
+  max-width: 80px;
+}
