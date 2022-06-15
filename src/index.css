@@ -5,12 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-y: hidden;
   overflow-x: hidden;
-  background-image: url("https://www.pngplay.com/wp-content/uploads/13/Japanese-Art-Transparent-Images.png");
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: 100%;
+}
+
+::-webkit-scrollbar{
+  display: none;
 }
 
 code {
