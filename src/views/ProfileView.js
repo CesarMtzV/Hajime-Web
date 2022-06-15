@@ -10,6 +10,7 @@ import pp7 from "../assets/profile-pictures/profilePreset_7.jpg";
 import pp8 from "../assets/profile-pictures/profilePreset_8.jpg";
 import pp9 from "../assets/profile-pictures/profilePreset_9.jpg";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 export const ProfileView = () => {
     const { destroySession, email, name, userName, pp } = useAuth();
@@ -43,7 +44,13 @@ export const ProfileView = () => {
 
     return (
         <>
-            <div className="main-content">
+            <motion.div
+                className="main-content"
+                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: .5 }}
+            >
                 <div className="container">
                     <div className="row">
                         <div className="col-12 col-lg-4 text-center p-5">
@@ -247,7 +254,7 @@ export const ProfileView = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </>
     );
 };
