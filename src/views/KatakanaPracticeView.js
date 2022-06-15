@@ -160,15 +160,14 @@ const KatakanaPracticeView = () => {
                     if (highScore !== 0) {
                         console.log(ach)
                         if (ach[0].progress === 0) {
-                            ach[0].progress = 1;
+                            ach[0].progress = 100;
                             await updateAchievements(ach);
                         }
                     }
 
                     if (ach[8].progress < 1) {
-                        if (ach[8].progress < (quizScore + 1)/30) {
-                            ach[8].progress = (quizScore + 1)/30;
-                            ach[8].progress = ach[8].progress.toFixed(2);
+                        if (ach[8].progress < 100) {
+                            ach[8].progress += 10;
                             await updateAchievements(ach);
                         }
                     }
@@ -201,7 +200,7 @@ const KatakanaPracticeView = () => {
             const ach = await getAchievements();
 
             if (ach[2].progress === 0) {
-                ach[2].progress = 1;
+                ach[2].progress = 100;
                 await updateAchievements(ach);
             }
             setQuizScore(0);
