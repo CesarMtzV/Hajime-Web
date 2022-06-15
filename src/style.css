@@ -12202,3 +12202,8 @@ fieldset:disabled .btn {
   border: solid 2px rgba(0, 0, 0, 0.1);
   padding: 20px 0px;
 }
+
+.logoNavBar {
+  border-radius: 50%;
+  max-width: 80px;
+}
