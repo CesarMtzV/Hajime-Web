@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../components/auth/auth";
@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 export const KanjiSetView = () => {
     const params = useParams();
     const { userName, kanjiSets } = useAuth();
+    const navigate = useNavigate();
     const [buttonPopup, setButtonPopup] = useState(false);
     const [error, setError] = useState(null);
     const [quizButtonStatus, setQuizButtonStatus] = useState(false);
@@ -30,7 +31,7 @@ export const KanjiSetView = () => {
     });
 
     useEffect(() => {
-        if (kanji_list.length > 2) {
+        if (kanji_list.length > 5) {
             setQuizButtonStatus(true);
         }
     }, []);
@@ -230,9 +231,8 @@ export const KanjiSetView = () => {
                                         <motion.button
                                             whileHover={{ scale: 1.1 }}
                                             whileTap={{ scale: 0.9 }}
-                                            disabled={quizButtonStatus}
                                             className="hajime-button text-white fw-bold px-3 mx-3"
-                                            onClick={() => setButtonPopup(true)}
+                                            onClick={() => navigate(`/kanji/${params.set}/practice`)}
                                         >
                                             Quiz
                                         </motion.button>
