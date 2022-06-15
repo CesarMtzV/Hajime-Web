@@ -7,6 +7,12 @@ authors = ["CesarMtzV <mc.cesar.art@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 Flask = "^2.0.3"
+Flask-PyMongo = "^2.3.0"
+pymongo = {extras = ["srv"], version = "^4.1.1"}
+python-dotenv = "^0.20.0"
+PyJWT = "^2.3.0"
+bcrypt = "^3.2.0"
+Flask-Cors = "^3.0.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
