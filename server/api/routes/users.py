@@ -69,7 +69,8 @@ def signup():
                 }
             ],
             'katakanaHighScore': 0,
-            'hiraganaHighScore': 0
+            'hiraganaHighScore': 0,
+            'kanjiHighScore': 0
         })
         return jsonify({'message': 'Account created succesfully!'})
     return jsonify({'message': 'Username already exists!'})

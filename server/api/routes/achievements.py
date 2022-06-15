@@ -75,3 +75,18 @@ def save_katakana_score():
     else:
         foundUser = db.users.find_one({'userName': user['userName']})
         return jsonify({'katakanaHighScore': foundUser['katakanaHighScore']})
+
+@routes_achievements.route('/kanjiHighScore', methods=['GET', 'POST'])
+def save_kanji_score():
+    from api import db
+    user = decode(token, key=getenv('SECRET'), algorithms=['HS256'])
+
+    if request.method == 'POST':
+        db.users.update_one(
+            {'userName': user['userName']},
+            {'$set': {'kanjiHighScore': request.json['kanjiHighScore']}}
+        )
+        return jsonify({'message': 'New Kanji high score set succesfully!'})
+    else:
+        foundUser = db.users.find_one({'userName': user['userName']})
+        return jsonify({'kanjiHighScore': foundUser['kanjiHighScore']})

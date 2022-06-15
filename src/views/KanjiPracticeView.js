@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../components/auth/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 export const KanjiPracticeView = () => {
     const params = useParams();
@@ -46,6 +47,39 @@ export const KanjiPracticeView = () => {
         ]),
     });
 
+    useEffect(() => {
+        const fetchData = async () => {
+            var token = localStorage.getItem("token");
+
+            const data = await fetch("/api/achievements/kanjiHighScore", {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            let score;
+            if (data) {
+                score = await data.json();
+            }
+
+            if (score) {                   
+                setHighScore(score.kanjiHighScore);
+            }
+        }
+
+        fetchData();
+    }, [setQuizScore])
+    
+    const updateHighScore = async (quizScore) => {
+        var token = localStorage.getItem("token");
+
+        await axios.post("/api/achievements/kanjiHighScore", {'kanjiHighScore': quizScore}, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+        });
+    }
+
     const handleAnswerOptionClick = async (isCorrect) => {
         var aux = Math.floor(Math.random() * keys.length);
 
@@ -71,7 +105,7 @@ export const KanjiPracticeView = () => {
                 // }
 
                 setHighScore(quizScore + 1);
-                // updateHighScore(quizScore + 1);
+                updateHighScore(quizScore + 1);
             }
         } else {
             toast.error("Try again!", { duration: 1000 });
