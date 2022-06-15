@@ -12083,7 +12083,7 @@ fieldset:disabled .btn {
 }
 
 .scrollSilabarios {
-  max-height: 95vh;
+  max-height: 80vh;
   overflow-y: auto;
 }
 
@@ -12184,6 +12184,32 @@ fieldset:disabled .btn {
 .main-content{
   height: 95vh;
   width: 100vw;
+  background-image: url("https://www.pngplay.com/wp-content/uploads/13/Japanese-Art-Transparent-Images.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100%;
+}
+
+@keyframes animateBG {
+	0% { background-position: 0px 55vh, 15% 30%, 85% 25%, 0 0; }
+	50% { background-position: 0px bottom, 15% 30%, 85% 30%, 50% 0; }
+  100% { background-position: 0px 55vh, 15% 30%, 85% 25%, 100% 0; }
+}
+
+.grayOverlay {
+  background-color: rgba(0, 0, 0, .3);
+  width: 100vw;
+  height: 100%;
+}
+
+.landing-content {
+  height: 100vh;
+  width: 100vw;
+  background: url("https://www.pngplay.com/wp-content/uploads/13/Japanese-Art-Transparent-Images.png"), url("../src/assets/JapanSun.png"), url("../src/assets/SmallCranes.png"), url("../src/assets/ricePaper.jpg");
+  background-position: bottom, 15% 15%, 60% 60%, 0px 0px;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  background-size: 100%, 20%, 15%, 50%;
+  animation: animateBG 5s linear infinite;
 }
 
 .ppImage {
