@@ -7,17 +7,23 @@ export const KanjiSetCard = ({title, numberOfKanji}) => {
   const navigate = useNavigate()
 
   return (
-    <div className="col-12 col-sm-6 col-lg-3 p-2">
+    <div className="col-12 col-sm-6 col-lg-3 p-2 kanjiSetContainer">
         <div 
-            className='p-3 rounded raise kanjiSetCard'
-            onClick={ () => { 
-              const url_title = title.split(' ').join('_')
-              navigate(`/kanji/${url_title}`) 
-            }}
+          class="card w-100"
+          onClick={ () => { 
+            const url_title = title.split(' ').join('_')
+            navigate(`/kanji/${url_title}`) 
+          }}
         >
-            <h3 className='fw-bold'>{title}</h3>
-            <p>{numberOfKanji} kanji</p>
-        </div>
+          <div class="content">
+            <div class="contentBx">
+              <h3>{title}<br/><span>{numberOfKanji} kanji</span></h3>
+            </div>
+          </div>
+          <div class="sci">
+              <p>description</p>
+          </div>
+			</div>
     </div>
   )
 }

@@ -79,7 +79,7 @@ export const KanjiView = () => {
     return (
         <>
             <div className="container">
-                <h1 className="my-5 fw-bold">Your Kanji sets</h1>
+                <h1 className="mt-5 mb-3 fw-bold">Your Kanji sets</h1>
 
                 {/* KANJI SETS GRID */}
                 <div className="row cardsKanjiContainer">
@@ -139,7 +139,7 @@ export const KanjiView = () => {
                     <motion.button
                         whileHover={{scale: 1.1}}
                         whileTap = {{scale: 0.9}}
-                        className="hajime-button text-white mt-2"
+                        className="hajime-button text-white mt-2 mb-2"
                         onClick={() => setButtonPopup(true)}
                     >
                         + New set
