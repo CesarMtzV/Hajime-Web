@@ -55,9 +55,8 @@ const LoginView = () => {
                     setLoggedIn(true);
                     navigate("/home");
                     const ach = await getAchievements();
-                    if (ach[7].progress < 1) {
-                        ach[7].progress += 0.1;
-                        ach[7].progress = ach[7].progress.toFixed(2);
+                    if (ach[7].progress < 100) {
+                        ach[7].progress += 10;
                         await updateAchievements(ach);
                     }
                 } else {

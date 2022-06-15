@@ -159,15 +159,14 @@ const HiraganaPracticeView = () => {
 
                     if (highScore !== 0) {
                         if (ach[1].progress === 0) {
-                            ach[1].progress = 1;
+                            ach[1].progress = 100;
                             await updateAchievements(ach);
                         }
                     }
 
                     if (ach[8].progress < 1) {
-                        if (ach[8].progress < (quizScore + 1)/30) {
-                            ach[8].progress = (quizScore + 1)/30;
-                            ach[8].progress = ach[8].progress.toFixed(2);
+                        if (ach[8].progress < 100) {
+                            ach[8].progress += 10;
                             await updateAchievements(ach);
                         }
                     }

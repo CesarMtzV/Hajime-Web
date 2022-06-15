@@ -60,14 +60,13 @@ export const KanjiView = () => {
             .then(async (result) => {
                 const ach = await getAchievements();
 
-                if (ach[5].progress !== 1) {
-                    ach[5].progress = 1;
+                if (ach[5].progress !== 100) {
+                    ach[5].progress = 100;
                     await updateAchievements(ach);
                 }
 
-                if (ach[6].progress < 1) {
-                    ach[6].progress += 0.1;
-                    ach[6].progress = ach[6].progress.toFixed(2);
+                if (ach[6].progress < 100) {
+                    ach[6].progress += 10;
                     await updateAchievements(ach);
                 }
 

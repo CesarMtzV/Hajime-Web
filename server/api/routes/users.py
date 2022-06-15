@@ -65,7 +65,7 @@ def signup():
                 {
                     'title': 'Quiz Master',
                     'progress': 0,
-                    'description': 'Yo got more than 30 in a quiz'
+                    'description': 'Yo got more than 10 in a quiz'
                 }
             ],
             'katakanaHighScore': 0,

@@ -65,9 +65,9 @@ const HomeView = () => {
 
         if (kanjiJson) {
             setRandomKanji(kanjiJson);
-            if (achievements[4].progress !== 1) {
+            if (achievements[4].progress !== 100) {
                 const aux = achievements;
-                aux[4].progress = 1;
+                aux[4].progress = 100;
                 setAchievements(aux);
                 await updateAchievements(aux);
             }
@@ -108,12 +108,12 @@ const HomeView = () => {
                                             style={{ width: 100, height: 100 }}
                                         >
                                             <CircularProgressbarWithChildren
-                                                value={ach.progress * 100}
+                                                value={ach.progress}
                                                 styles={buildStyles({
                                                     rotation: 0.25,
                                                     pathTransitionDuration: 0.5,
                                                     pathColor: `rgba(155, 230, 34, ${
-                                                        ach.progress * 100
+                                                        ach.progress
                                                     })`,
                                                     textColor: "#f88",
                                                     trailColor: "#d6d6d6",
@@ -122,7 +122,7 @@ const HomeView = () => {
                                             >
                                                 <div style={{ marginTop: -5 }}>
                                                     <strong>
-                                                        {ach.progress * 100}%
+                                                        {ach.progress}%
                                                     </strong>
                                                 </div>
                                             </CircularProgressbarWithChildren>
@@ -257,22 +257,20 @@ const HomeView = () => {
                                 <div className="row achievements-card">
                                     {achievements &&
                                         achievements.map((ach) => {
-                                            if (ach.progress !== 1) {
+                                            if (ach.progress !== 100) {
                                                 return (
                                                     <div className="col-md-3 d-flex flex-column align-items-center">
                                                         <div className="achievements-card-element">
                                                             <CircularProgressbarWithChildren
                                                                 value={
-                                                                    ach.progress *
-                                                                    100
+                                                                    ach.progress
                                                                 }
                                                                 styles={buildStyles(
                                                                     {
                                                                         rotation: 0.25,
                                                                         pathTransitionDuration: 0.5,
                                                                         pathColor: `rgba(155, 230, 34, ${
-                                                                            ach.progress *
-                                                                            100
+                                                                            ach.progress
                                                                         })`,
                                                                         textColor:
                                                                             "#f88",
@@ -291,8 +289,7 @@ const HomeView = () => {
                                                                     }}
                                                                 >
                                                                     <strong>
-                                                                        {ach.progress *
-                                                                            100}
+                                                                        {ach.progress}
                                                                         %
                                                                     </strong>
                                                                 </div>
