@@ -200,7 +200,7 @@ const KatakanaPracticeView = () => {
             const ach = await getAchievements();
 
             if (ach[2].progress === 0) {
-                ach[2].progress = 1;
+                ach[2].progress = 100;
                 await updateAchievements(ach);
             }
             setQuizScore(0);

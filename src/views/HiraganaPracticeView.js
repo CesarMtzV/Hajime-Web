@@ -199,7 +199,7 @@ const HiraganaPracticeView = () => {
             const ach = await getAchievements();
 
             if (ach[3].progress === 0) {
-                ach[3].progress = 1;
+                ach[3].progress = 100;
                 updateAchievements(ach);
             }
             setQuizScore(0);
