@@ -1,20 +1,20 @@
 .raise:hover,
 .raise:focus {
-  box-shadow: 0 0.5em 0.5em -0.4em black;
-  transform: translateY(-0.25em);
-  transition: 0.5s;
+	box-shadow: 0 0.5em 0.5em -0.4em black;
+	transform: translateY(-0.25em);
+	transition: 0.5s;
 }
 
 @media (min-width: 1200px){
-  .kanji-card {
-    width: 75%;
-    margin: auto
-  }
+	.kanji-card {
+		width: 75%;
+		margin: auto
+	}
 }
 
 .kanjiSetCard {
-  background-color: #b98cb3;
-  color: #FFFFFF;
+	background-color: #b98cb3;
+	color: #FFFFFF;
 }
 
 .kanjiSetContainer {
@@ -27,7 +27,7 @@
 
 .kanjiSetContainer .card {
 	position: relative;
-  height: 100px;
+	height: 100px;
 	background: rgba(255, 255, 255, 0.05);
 	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
 	border-radius: 15px;
@@ -35,8 +35,8 @@
 	justify-content: center;
 	align-items: center;
 	backdrop-filter: blur(10px);
-  background-color: #b98cb3;
-  transition: background-color 0.25s;
+	background-color: #b98cb3;
+	transition: background-color 0.25s;
 }
 
 .kanjiSetContainer .card .content {
@@ -49,11 +49,11 @@
 }
 
 .kanjiSetContainer .card:hover .content {
-	transform: translateY(-20px);
+	transform: translateY(-10px);
 }
 
 .kanjiSetContainer .card:hover {
-  background-color: #BF96BA;
+	background-color: #BF96BA;
 }
 
 .kanjiSetContainer .card .content .contentBx h3 {
@@ -64,31 +64,12 @@
 	text-align: center;
 	margin: 20px 0 10px;
 	line-height: 1.1em;
-  color: #FFFFFF;
+	color: #FFFFFF;
 }
 
 .kanjiSetContainer .card .content .contentBx h3 span {
 	font-size: 18px;
 	font-weight: 300;
 	text-transform: initial;
-  color: #000000;
-}
-
-.kanjiSetContainer .card .sci {
-  position: absolute;
-	bottom: 10px;
-	display: flex;
-}
-
-.kanjiSetContainer .card .sci p {
-	list-style: none;
-	margin: 0 10px;
-	transform: translateY(10px);
-	transition: 0.5s;
-	opacity: 0;
-}
-
-.kanjiSetContainer .card:hover .sci p {
-	transform: translateY(0px);
-	opacity: 1;
+	color: #000000;
 }

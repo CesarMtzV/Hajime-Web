@@ -189,10 +189,10 @@ export const KanjiSetView = () => {
                             </div>
                         </div>
                     ) : (
-                        <div>
+                        <div className="scroll">
                             {kanji_list.map((item, key) => {
                                 return (
-                                    <div key={key} className="col">
+                                    <div key={key}>
                                         <KanjiCard
                                             kanji={item.kanji}
                                             spelling={item.spelling}
@@ -217,35 +217,36 @@ export const KanjiSetView = () => {
                                     {CreateNewKanjiForm()}
                                 </NewModal>
 
-                                <div className="d-flex justify-content-end">
-                                    <motion.button
-                                        whileHover={{ scale: 1.1 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        className="hajime-button text-white fw-bold px-3"
-                                        onClick={() => setButtonPopup(true)}
-                                    >
-                                        + New Kanji
-                                    </motion.button>
-
-                                    {quizButtonStatus ? (
-                                        <motion.button
-                                            whileHover={{ scale: 1.1 }}
-                                            whileTap={{ scale: 0.9 }}
-                                            className="hajime-button text-white fw-bold px-3 mx-3"
-                                            onClick={() => navigate(`/kanji/${params.set}/practice`)}
-                                        >
-                                            Quiz
-                                        </motion.button>
-                                    ) : (
-                                        <div className="hajime-button mx-3 text-white fw-bold px-3">
-                                            You need at least 5 kanjis to access
-                                            quiz mode
-                                        </div>
-                                    )}
-                                </div>
+                                
                             </div>
                         </div>
                     )}
+                    <div className="d-flex justify-content-end">
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="hajime-button text-white fw-bold px-3"
+                            onClick={() => setButtonPopup(true)}
+                        >
+                            + New Kanji
+                        </motion.button>
+
+                        {quizButtonStatus ? (
+                            <motion.button
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                                className="hajime-button text-white fw-bold px-3 mx-3"
+                                onClick={() => navigate(`/kanji/${params.set}/practice`)}
+                            >
+                                Quiz
+                            </motion.button>
+                        ) : (
+                            <div className="hajime-button mx-3 text-white fw-bold px-3">
+                                You need more than 5 kanjis to access
+                                quiz mode
+                            </div>
+                        )}
+                    </div>
                 </div>
             </motion.div>
         </>

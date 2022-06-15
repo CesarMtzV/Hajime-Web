@@ -20,9 +20,6 @@ export const KanjiSetCard = ({title, numberOfKanji}) => {
               <h3>{title}<br/><span>{numberOfKanji} kanji</span></h3>
             </div>
           </div>
-          <div class="sci">
-              <p>description</p>
-          </div>
 			</div>
     </div>
   )
