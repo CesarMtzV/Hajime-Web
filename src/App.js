@@ -23,6 +23,7 @@ import { loggedIn_routes } from "./static/navbarRoutes";
 import { ProfileView } from "./views/ProfileView";
 import { KanjiView } from "./views/KanjiView";
 import { KanjiSetView } from "./views/KanjiSetView";
+import { KanjiPracticeView } from "./views/KanjiPracticeView";
 
 const App = () => {
     const [authToken, setAuthToken] = useState();
@@ -129,6 +130,14 @@ const App = () => {
                         element={
                             <ProtectedRoute token={authToken}>
                                 <KanjiSetView />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/kanji/:set/practice"
+                        element={
+                            <ProtectedRoute token={authToken}>
+                                <KanjiPracticeView />
                             </ProtectedRoute>
                         }
                     />

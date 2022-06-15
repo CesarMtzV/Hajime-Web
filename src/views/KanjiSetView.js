@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../components/auth/auth";
@@ -12,8 +12,10 @@ import { motion } from "framer-motion";
 export const KanjiSetView = () => {
     const params = useParams();
     const { userName, kanjiSets } = useAuth();
+    const navigate = useNavigate();
     const [buttonPopup, setButtonPopup] = useState(false);
     const [error, setError] = useState(null);
+    const [quizButtonStatus, setQuizButtonStatus] = useState(false);
     const {
         register,
         handleSubmit,
@@ -27,6 +29,12 @@ export const KanjiSetView = () => {
             kanji_list = item.kanji;
         }
     });
+
+    useEffect(() => {
+        if (kanji_list.length > 5) {
+            setQuizButtonStatus(true);
+        }
+    }, []);
 
     const onSubmit = (data) => {
         const kanji = {
@@ -115,8 +123,8 @@ export const KanjiSetView = () => {
 
                     <div className="pt-1 mb-4">
                         <motion.button
-                            whileHover={{scale: 1.1}}
-                            whileTap = {{scale: 0.9}}
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
                             className="hajime-button text-white text-light fw-bold"
                             type="submit"
                         >
@@ -136,7 +144,7 @@ export const KanjiSetView = () => {
                 animate={{ opacity: 1, y: 0 }}
                 initial={{ opacity: 0, y: 20 }}
                 exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: .5 }}
+                transition={{ duration: 0.5 }}
             >
                 <div className="container">
                     <h1 className="text-center py-3 fw-bold">Set: {title}</h1>
@@ -162,8 +170,8 @@ export const KanjiSetView = () => {
                                 title="New kanji set"
                                 showHeader={true}
                                 showOverlay={true}
-                                alignModal={'center'}
-                                paddingModal={'10px'}
+                                alignModal={"center"}
+                                paddingModal={"10px"}
                             >
                                 <h3 className="mb-3">New kanji</h3>
                                 {CreateNewKanjiForm()}
@@ -171,8 +179,8 @@ export const KanjiSetView = () => {
 
                             <div className="d-flex justify-content-end">
                                 <motion.button
-                                    whileHover={{scale: 1.1}}
-                                    whileTap = {{scale: 0.9}}
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
                                     className="hajime-button text-white fw-bold px-3"
                                     onClick={() => setButtonPopup(true)}
                                 >
@@ -202,8 +210,8 @@ export const KanjiSetView = () => {
                                     title="New kanji set"
                                     showHeader={true}
                                     showOverlay={true}
-                                    alignModal={'center'}
-                                    paddingModal={'10px'}
+                                    alignModal={"center"}
+                                    paddingModal={"10px"}
                                 >
                                     <h3 className="mb-3">New kanji</h3>
                                     {CreateNewKanjiForm()}
@@ -211,13 +219,29 @@ export const KanjiSetView = () => {
 
                                 <div className="d-flex justify-content-end">
                                     <motion.button
-                                        whileHover={{scale: 1.1}}
-                                        whileTap = {{scale: 0.9}}
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.9 }}
                                         className="hajime-button text-white fw-bold px-3"
                                         onClick={() => setButtonPopup(true)}
                                     >
                                         + New Kanji
                                     </motion.button>
+
+                                    {quizButtonStatus ? (
+                                        <motion.button
+                                            whileHover={{ scale: 1.1 }}
+                                            whileTap={{ scale: 0.9 }}
+                                            className="hajime-button text-white fw-bold px-3 mx-3"
+                                            onClick={() => navigate(`/kanji/${params.set}/practice`)}
+                                        >
+                                            Quiz
+                                        </motion.button>
+                                    ) : (
+                                        <div className="hajime-button mx-3 text-white fw-bold px-3">
+                                            You need at least 5 kanjis to access
+                                            quiz mode
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
