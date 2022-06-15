@@ -12229,11 +12229,7 @@ fieldset:disabled .btn {
   padding: 20px 0px;
 }
 
-.animBG {
-  height: 200px;
-  background-image: url("https://www.pngplay.com/wp-content/uploads/13/Japanese-Art-Transparent-Images.png");
-  background-repeat: no-repeat;
-  background-position: bottom;
-  background-size: 100%;
-  z-index: 0;
+.logoNavBar {
+  border-radius: 50%;
+  max-width: 80px;
 }
