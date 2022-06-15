@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "../components/NavBar/NavBar";
 import { welcomeView_routes } from "../static/navbarRoutes";
 import { MemberCard } from "../components/MemberCard";
+import { motion } from "framer-motion";
 
 export const AboutView = () => {
     const members = [
@@ -37,28 +38,39 @@ export const AboutView = () => {
 
     return (
         <>
-            <NavBar navbarRoutes={welcomeView_routes} />
-            <div className="container py-5">
-                <div className="row text-center">
-                    <div className="col-lg-8 mx-auto">
-                        <h1 className="display-4">About Us</h1>
-                    </div>
-                </div>
-            </div>
+            <div className="landing-content">
+                <div className="grayOverlay">
+                    <NavBar navbarRoutes={welcomeView_routes} />
+                    <motion.div
+                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: .5 }}
+                    >
+                        <div className="container py-5">
+                            <div className="row text-center">
+                                <div className="col-lg-8 mx-auto">
+                                    <h1 className="display-4 tw-bold">About Us</h1>
+                                </div>
+                            </div>
+                        </div>
 
-            <div className="container">
-                <div className="row text-center">
-                    {members.map((item, key) => {
-                        return (
-                            <MemberCard
-                                key={key}
-                                name={item.name}
-                                role={item.role}
-                                github_link={item.github_link}
-                                profile_picture={item.profile_picture}
-                            />
-                        );
-                    })}
+                        <div className="container">
+                            <div className="row text-center">
+                                {members.map((item, key) => {
+                                    return (
+                                        <MemberCard
+                                            key={key}
+                                            name={item.name}
+                                            role={item.role}
+                                            github_link={item.github_link}
+                                            profile_picture={item.profile_picture}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </>
